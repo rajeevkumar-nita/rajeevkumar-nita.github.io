@@ -59,13 +59,14 @@ const Home = () => {
         </h2>
 
         {/* Slogan */}
-        <h3
-          className="text-2xl sm:text-3xl font-semibold mt-6 mb-4 animate-pulse text-white drop-shadow"
-          data-aos="fade-up"
-          data-aos-delay="200"
-        >
-          Let's build something great together 🚀
-        </h3>
+       <h3
+  className="text-[clamp(1.2rem,5vw,1.75rem)] font-semibold mt-6 mb-4 animate-pulse text-white drop-shadow whitespace-nowrap"
+  data-aos="fade-up"
+  data-aos-delay="200"
+     >
+  Let's build something great together 🚀
+       </h3>
+
 
         {/* CTA Buttons */}
         <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mt-6" data-aos="zoom-in">
@@ -88,7 +89,7 @@ const Home = () => {
         </div>
 
         {/* Social Media Links */}
-        <div className="mt-10 flex flex-wrap justify-center gap-4 sm:gap-6">
+        <div className="mt-10 flex flex-nowrap justify-center gap-3 sm:gap-5 overflow-x-auto">
           {socialLinks.map(({ href, icon, img, label }, idx) => (
             <a
               key={idx}
@@ -98,7 +99,7 @@ const Home = () => {
               data-aos="zoom-in-up"
               aria-label={label}
             >
-              <div className="w-12 h-12 flex items-center justify-center rounded-full bg-white hover:bg-slate-100 shadow-md hover:shadow-xl transition-transform duration-300 hover:scale-110">
+              <div className="w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center rounded-full bg-white hover:bg-slate-100 shadow-md hover:shadow-xl transition-transform duration-300 hover:scale-110">
                 {icon ? (
                   <span className="text-xl text-gray-800">{icon}</span>
                 ) : (
