@@ -23,24 +23,29 @@ const SkillCard = ({ icon, name, level, color, tags = [] }) => {
       className="bg-white p-6 rounded-lg shadow-md border border-sky-100 hover:shadow-xl transition-all transform hover:scale-105"
     >
       <div className="text-center">
-        <div className="relative mb-4 group">
-          {IconComponent ? (
-            <IconComponent size={40} className={color} />
-          ) : (
-            <img
-              src={icon}
-              alt={name}
-              className="w-10 h-10 mx-auto block object-contain"
-            />
-          )}
-          <div className="absolute -top-8 left-1/2 -translate-x-1/2 px-2 py-1 bg-black text-white text-xs rounded opacity-0 group-hover:opacity-100 whitespace-nowrap">
-            {name}
+        {/* Icon with tooltip aligned right */}
+        <div className="mb-4 flex justify-center items-center min-h-[40px]">
+          <div className="relative group w-fit flex items-center justify-center">
+            {IconComponent ? (
+              <IconComponent size={40} className={color} />
+            ) : (
+              <img
+                src={icon}
+                alt={name}
+                className="w-10 h-10 object-contain"
+              />
+            )}
+            <div className="absolute left-[105%] top-1/2 -translate-y-1/2 px-2 py-1 bg-black text-white text-xs rounded opacity-0 group-hover:opacity-100 whitespace-nowrap z-50 shadow-lg">
+              {name}
+            </div>
           </div>
         </div>
 
+        {/* Skill name and level */}
         <h3 className="text-lg font-semibold text-slate-800">{name}</h3>
         <p className="text-sm text-slate-600 mb-2">Proficiency: {level}</p>
 
+        {/* Tags */}
         <div className="flex flex-wrap gap-1 justify-center mt-2">
           {tags.map((tag, i) => (
             <span
