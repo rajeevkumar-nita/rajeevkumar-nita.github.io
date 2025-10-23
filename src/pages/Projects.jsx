@@ -20,7 +20,7 @@ const Projects = () => {
             title="Chatify"
             description="A real-time chat application built with React, Node.js, and Socket.IO."
             github="https://github.com/rkrustom/Chatify"
-            link="https://github.com/rkrustom/Chatify"
+            link="https://chatify-wheat.vercel.app/login"
             aos="fade-up"
             aosDelay="0"
           />
@@ -28,7 +28,7 @@ const Projects = () => {
             title="PasteAPP"
             description="Paste, save, and share your code instantly. Built using React + Firebase."
             github="https://github.com/rkrustom/PasteAPP"
-            link="https://github.com/rkrustom/PasteAPP"
+            link="https://paste-app-nine-ruddy.vercel.app/"
             aos="fade-up"
             aosDelay="200"
           />
@@ -36,7 +36,7 @@ const Projects = () => {
             title="Password Generator"
             description="Create secure passwords with custom options. Built with Vanilla JS."
             github="https://github.com/rkrustom/password-generator"
-            link="https://github.com/rkrustom/password-generator"
+            link="https://password-generator-rkrustom.vercel.app/"
             aos="fade-up"
             aosDelay="400"
           />

@@ -10,6 +10,8 @@ import Contact from './pages/Contact';
 import Footer from './components/Footer';
 import Achievements from './pages/Achievements';
 import About from "./pages/About";
+import Experience from "./pages/Experience";
+
 
 
 
@@ -24,8 +26,10 @@ const App = () => {
         <Home id="home" />
         <About id="about"/>
         {/* <Education id="education" /> */}
+         <Experience id="experience" />
         <Projects id="projects" />
         <Skills id="skills" />
+
         <Achievements id="achievements" />
         <Responsibility id="responsibility" />
         <Contact id="contact" />
