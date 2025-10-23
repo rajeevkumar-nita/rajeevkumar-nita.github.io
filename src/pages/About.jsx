@@ -1,127 +1,116 @@
 import React, { useEffect } from "react";
+import FlipCard from "../components/FlipCard";
+import Timeline from "../components/Timeline";
+import CountUp from "react-countup";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import { FaBuilding, FaCalendarAlt, FaMapMarkerAlt } from "react-icons/fa";
 
-const Experience = () => {
+const About = () => {
   useEffect(() => {
     AOS.init({ duration: 1000, once: true });
   }, []);
 
-  const experiences = [
-    {
-      title: "Assiciate Software Engineer",
-      company: "GlobalLogic",
-      duration: "Oct 2025 – Present",
-      location: "Nagpur, Maharashtra, India (Hybrid)",
-      description:
-        "Building scalable backend & Android apps for the healthcare sector using modern technologies and clean architecture.",
-      skills: ["Core Java", "Android Development", "Android Studio", "Kotlin"],
-      aosDelay: "0",
-    },
-    {
-      title: "Software Engineer Intern",
-      company: "GlobalLogic",
-      duration: "Aug 2025 – Sep 2025",
-      location: "On-site",
-      description:
-        "Gained hands-on experience building scalable APIs during a 2-month backend internship using Java, Spring Boot, and Microservices.",
-      skills: ["Java", "Spring Boot", "Microservices", "Git", "Postman"],
-      aosDelay: "200",
-    },
-  ];
-
   return (
-    <section
-      id="experience"
-      className="scroll-mt-32 py-20 bg-gradient-to-b from-[#eef2ff] to-[#e0f2fe] text-slate-800 relative overflow-hidden"
-    >
-      <div className="max-w-4xl mx-auto px-4 text-center relative z-10">
-        {/* Title */}
-        <h2
-          className="text-4xl font-bold text-sky-700 mb-16" // Increased margin-bottom
-          data-aos="fade-up"
-        >
-          Experience
+    <section id="about" className="bg-white text-slate-800 py-20 px-6 scroll-mt-32">
+      <div className="max-w-6xl mx-auto text-center">
+
+        {/* Title & Intro */}
+        <h2 className="text-4xl font-bold text-sky-600 mb-4" data-aos="fade-up">
+          About Me
         </h2>
 
-        {/* Vertical Timeline Container */}
-        <div className="relative max-w-3xl mx-auto">
-          
-          {/* The Vertical Line */}
-          <div className="absolute left-3 sm:left-6 top-1 w-1 bg-sky-200 h-full z-0"></div>
+        <p
+          className="text-base sm:text-lg text-slate-600 mb-12 max-w-2xl mx-auto"
+          data-aos="fade-up"
+          data-aos-delay="100"
+        >
+          I’m <strong className="text-slate-800">Rajeev Kumar</strong>, a{" "}
+          <strong className="text-blue-700">Software Engineer at GlobalLogic</strong>{" "}
+          working on backend and mobile development in the{" "}
+          <strong className="text-purple-700">healthcare domain</strong>. Passionate about{" "}
+          <strong className="text-sky-700">clean code</strong>,{" "}
+          <strong className="text-green-600">scalable systems</strong>, and{" "}
+          <strong className="text-indigo-700">real-world problem solving</strong>. I’ve solved{" "}
+          <strong>1000+ DSA problems</strong> and built projects using{" "}
+          <strong>React, Node.js,</strong> and <strong>Spring Boot</strong>.
+        </p>
 
-          {/* Mapping the experiences */}
-          {experiences.map((exp, index) => (
-            <div
-              key={index}
-              className="relative pl-12 sm:pl-20 pb-12" // Space for line + dot
-              data-aos="fade-up"
-              data-aos-delay={exp.aosDelay}
-            >
-              {/* Dot on the line */}
-              <div className="absolute left-3 sm:left-6 top-2 w-6 h-6 bg-white border-4 border-sky-500 rounded-full z-10 transform -translate-x-1/2"></div>
+        {/* Flip Cards
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 mb-16">
+          <div data-aos="zoom-in" data-aos-delay="0">
+            <FlipCard front="💼 Software Engineer" back="GlobalLogic (Healthcare Domain)" />
+          </div>
+          <div data-aos="zoom-in" data-aos-delay="100">
+            <FlipCard front="🧠 Problem Solver" back="1000+ DSA Questions" />
+          </div>
+          <div data-aos="zoom-in" data-aos-delay="200">
+            <FlipCard front="🌐 Full Stack Dev" back="React, Node.js, MongoDB" />
+          </div>
+        </div> */}
 
-              {/* The Card */}
-              <div className="relative bg-white/90 backdrop-blur-sm border border-sky-100 rounded-xl shadow-lg p-6 text-left
-                              transition-all duration-300 hover:shadow-xl hover:border-sky-300 hover:scale-[1.02]">
-                
-                {/* Arrow pointing to the dot */}
-                <div className="absolute -left-4 sm:-left-5 top-5 w-0 h-0 
-                              border-t-[10px] border-t-transparent
-                              border-r-[10px] border-r-white/90
-                              border-b-[10px] border-b-transparent
-                              hidden sm:block">
-                </div>
 
-                {/* --- Card Content --- */}
-                
-                {/* Title */}
-                <h3 className="text-xl font-bold text-slate-800">
-                  {exp.title}
-                </h3>
-                
-                {/* Company */}
-                <p className="text-sky-700 font-medium mt-1 flex items-center gap-2">
-                  <FaBuilding /> {exp.company}
-                </p>
-                
-                {/* Date/Location (Responsive) */}
-                <div className="mt-3 flex flex-col sm:flex-row justify-start items-start sm:items-center gap-1 sm:gap-4 text-slate-600 text-sm">
-                  <span className="flex items-center gap-2">
-                    <FaCalendarAlt className="flex-shrink-0" /> {exp.duration}
-                  </span>
-                  <span className="flex items-start sm:items-center gap-2">
-                    <FaMapMarkerAlt className="flex-shrink-0 mt-1 sm:mt-0" /> {exp.location}
-                  </span>
-                </div>
+        {/* Flip Cards */}
+<div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 mb-16">
+  <div data-aos="zoom-in" data-aos-delay="0">
+    {/* Card 1: MERN Stack */}
+    <FlipCard front="🌐 MERN Stack Dev" back="React, Node.js, MongoDB" />
+  </div>
+  <div data-aos="zoom-in" data-aos-delay="100">
+    {/* Card 2: Android */}
+    <FlipCard front="📱 Android Developer" back="Java & Kotlin" />
+  </div>
+  <div data-aos="zoom-in" data-aos-delay="200">
+    {/* Card 3: Problem Solving */}
+    <FlipCard front="🧠 Problem Solver" back="1500+ DSA Questions" />
+  </div>
+</div>
 
-                {/* Description */}
-                <p className="mt-4 text-slate-700 leading-relaxed">
-                  {exp.description}
-                </p>
 
-                {/* Skills (Responsive) */}
-                <div className="mt-4 flex flex-wrap justify-start gap-2">
-                  {exp.skills.map((skill, i) => (
-                    <span
-                      key={i}
-                      className="bg-sky-100 text-sky-700 text-xs md:text-sm px-2 md:px-3 py-1 rounded-full transition-all duration-300 hover:bg-sky-200"
-                    >
-                      {skill}
-                    </span>
-                  ))}
-                </div>
-                {/* --- End of Card Content --- */}
+      
+        {/* Quick Stats */}
+        <div className="flex flex-wrap justify-center gap-8 text-center mb-16">
+          <div className="text-lg font-medium" data-aos="fade-up">
+            <div className="text-4xl font-extrabold text-sky-600">
+              <CountUp end={1500} duration={2} />+
+            </div>
+            <div className="text-slate-700">DSA Solved</div>
+          </div>
+          <div className="text-lg font-medium" data-aos="fade-up" data-aos-delay="100">
+            <div className="text-4xl font-extrabold text-green-600">
+              <CountUp end={15} duration={2} />+
+            </div>
+            <div className="text-slate-700">Projects</div>
+          </div>
+          <div className="text-lg font-medium" data-aos="fade-up" data-aos-delay="200">
+            <div className="text-4xl font-extrabold text-purple-600">
+              <CountUp end={100} duration={2} />+
+            </div>
+            <div className="text-slate-700">Students Mentored</div>
+          </div>
+        </div>
 
-              </div> {/* End of card */}
-            </div> // End of timeline item
-          ))}
-        </div> {/* End of timeline container */}
+
+        {/* Timeline */}
+        <div
+          className="mt-12 py-12 px-4 bg-gradient-to-r from-[#eef2ff] to-[#e0f2fe] rounded-xl shadow-inner transition-all duration-300"
+          data-aos="fade-up"
+        >
+          <h3 className="text-2xl font-bold text-sky-700 mb-6">My B.Tech Journey</h3>
+          <Timeline />
+        </div>
+
+        {/* Footer Quote */}
+        <p
+          className="mt-16 text-base italic text-slate-500"
+          data-aos="fade-in"
+          data-aos-delay="100"
+        >
+          “Code. Build. Evolve.”
+        </p>
       </div>
-
     </section>
   );
 };
 
-export default Experience;
+export default About;
+
