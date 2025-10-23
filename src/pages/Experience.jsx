@@ -15,7 +15,7 @@ const Experience = () => {
       duration: "Oct 2025 – Present",
       location: "Nagpur, Maharashtra, India (Hybrid)",
       description:
-        "Working full-time in the healthcare domain, contributing to backend and Android development. Focused on building scalable, production-ready applications using modern technologies and clean architecture.",
+        "Building scalable backend & Android apps for the healthcare sector using modern technologies and clean architecture.",
       skills: ["Core Java", "Android Development", "Android Studio", "Kotlin"],
       aosDelay: "0",
     },
@@ -25,7 +25,7 @@ const Experience = () => {
       duration: "Aug 2025 – Sep 2025",
       location: "On-site",
       description:
-        "Completed a 2-month internship in backend development using Java, Spring Boot, and Microservices, gaining hands-on experience in building scalable APIs.",
+        "Gained hands-on experience building scalable APIs during a 2-month backend internship using Java, Spring Boot, and Microservices.",
       skills: ["Java", "Spring Boot", "Microservices", "Git", "Postman"],
       aosDelay: "200",
     },
@@ -36,88 +36,90 @@ const Experience = () => {
       id="experience"
       className="scroll-mt-32 py-20 bg-gradient-to-b from-[#eef2ff] to-[#e0f2fe] text-slate-800 relative overflow-hidden"
     >
-      {/* Animated gradient background lines */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-sky-100 via-transparent to-transparent opacity-60 animate-pulse"></div>
-
-      <div className="max-w-6xl mx-auto px-4 text-center relative z-10">
+      <div className="max-w-4xl mx-auto px-4 text-center relative z-10">
         {/* Title */}
         <h2
-          className="text-4xl font-bold text-sky-700 mb-12"
+          className="text-4xl font-bold text-sky-700 mb-16" // Increased margin-bottom
           data-aos="fade-up"
         >
           Experience
         </h2>
 
-        {/* Experience Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+        {/* Vertical Timeline Container */}
+        <div className="relative max-w-3xl mx-auto">
+          
+          {/* The Vertical Line */}
+          <div className="absolute left-3 sm:left-6 top-1 w-1 bg-sky-200 h-full z-0"></div>
+
+          {/* Mapping the experiences */}
           {experiences.map((exp, index) => (
             <div
               key={index}
-              className="relative group bg-white/90 backdrop-blur-sm border border-sky-100 rounded-2xl p-6 shadow-lg 
-                         transition-all duration-700 hover:shadow-2xl hover:scale-[1.03] hover:-translate-y-2
-                         overflow-hidden"
+              className="relative pl-12 sm:pl-20 pb-12" // Space for line + dot
               data-aos="fade-up"
               data-aos-delay={exp.aosDelay}
             >
-              {/* Animated glowing border */}
-              <div className="absolute inset-0 rounded-2xl border-2 border-transparent bg-gradient-to-r from-sky-400 via-purple-400 to-blue-400 
-                              opacity-0 group-hover:opacity-100 blur-md animate-gradient-move transition-all duration-700"></div>
+              {/* Dot on the line */}
+              <div className="absolute left-3 sm:left-6 top-2 w-6 h-6 bg-white border-4 border-sky-500 rounded-full z-10 transform -translate-x-1/2"></div>
 
-              {/* 3D Hover effect layer */}
-              <div className="relative z-10 transform group-hover:rotate-[1deg] transition-transform duration-500">
+              {/* The Card */}
+              <div className="relative bg-white/90 backdrop-blur-sm border border-sky-100 rounded-xl shadow-lg p-6 text-left
+                              transition-all duration-300 hover:shadow-xl hover:border-sky-300 hover:scale-[1.02]">
+                
+                {/* Arrow pointing to the dot */}
+                <div className="absolute -left-4 sm:-left-5 top-5 w-0 h-0 
+                              border-t-[10px] border-t-transparent
+                              border-r-[10px] border-r-white/90
+                              border-b-[10px] border-b-transparent
+                              hidden sm:block">
+                </div>
+
+                {/* --- Card Content --- */}
+                
+                {/* Title */}
                 <h3 className="text-xl font-bold text-slate-800">
                   {exp.title}
                 </h3>
-                <p className="text-sky-700 font-medium mt-1 flex justify-center items-center gap-2">
+                
+                {/* Company */}
+                <p className="text-sky-700 font-medium mt-1 flex items-center gap-2">
                   <FaBuilding /> {exp.company}
                 </p>
-                <div className="mt-2 flex justify-center items-center gap-3 text-slate-600 text-sm">
-                  <span className="flex items-center gap-1">
-                    <FaCalendarAlt /> {exp.duration}
+                
+                {/* Date/Location (Responsive) */}
+                <div className="mt-3 flex flex-col sm:flex-row justify-start items-start sm:items-center gap-1 sm:gap-4 text-slate-600 text-sm">
+                  <span className="flex items-center gap-2">
+                    <FaCalendarAlt className="flex-shrink-0" /> {exp.duration}
                   </span>
-                  <span className="flex items-center gap-1">
-                    <FaMapMarkerAlt /> {exp.location}
+                  <span className="flex items-start sm:items-center gap-2">
+                    <FaMapMarkerAlt className="flex-shrink-0 mt-1 sm:mt-0" /> {exp.location}
                   </span>
                 </div>
 
+                {/* Description */}
                 <p className="mt-4 text-slate-700 leading-relaxed">
                   {exp.description}
                 </p>
 
-                <div className="mt-4 flex flex-wrap justify-center gap-2">
+                {/* Skills (Responsive) */}
+                <div className="mt-4 flex flex-wrap justify-start gap-2">
                   {exp.skills.map((skill, i) => (
                     <span
                       key={i}
-                      className="bg-sky-100 text-sky-700 text-sm px-3 py-1 rounded-full transition-all duration-300 hover:bg-sky-200 hover:shadow-md"
+                      className="bg-sky-100 text-sky-700 text-xs md:text-sm px-2 md:px-3 py-1 rounded-full transition-all duration-300 hover:bg-sky-200"
                     >
                       {skill}
                     </span>
                   ))}
                 </div>
-              </div>
+                {/* --- End of Card Content --- */}
 
-              {/* Subtle animated gradient light behind card */}
-              <div className="absolute -top-1/2 -left-1/2 w-[300%] h-[300%] bg-gradient-to-r from-sky-200 via-blue-200 to-purple-200 opacity-0 group-hover:opacity-30 transition duration-700 blur-3xl animate-spin-slow"></div>
-            </div>
+              </div> {/* End of card */}
+            </div> // End of timeline item
           ))}
-        </div>
+        </div> {/* End of timeline container */}
       </div>
 
-      {/* Gradient animation keyframes */}
-      <style>{`
-        @keyframes gradientMove {
-          0% { background-position: 0% 50%; }
-          50% { background-position: 100% 50%; }
-          100% { background-position: 0% 50%; }
-        }
-        .animate-gradient-move {
-          background-size: 200% 200%;
-          animation: gradientMove 4s ease infinite;
-        }
-        .animate-spin-slow {
-          animation: spin 12s linear infinite;
-        }
-      `}</style>
     </section>
   );
 };
