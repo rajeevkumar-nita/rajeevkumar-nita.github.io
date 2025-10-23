@@ -31,23 +31,11 @@ const About = () => {
           <strong className="text-sky-700">clean code</strong>,{" "}
           <strong className="text-green-600">scalable systems</strong>, and{" "}
           <strong className="text-indigo-700">real-world problem solving</strong>. I’ve solved{" "}
-          <strong>1000+ DSA problems</strong> and built projects using{" "}
+          <strong>1500+ DSA problems</strong> and built projects using{" "}
           <strong>React, Node.js,</strong> and <strong>Spring Boot</strong>.
         </p>
 
-        {/* Flip Cards
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 mb-16">
-          <div data-aos="zoom-in" data-aos-delay="0">
-            <FlipCard front="💼 Software Engineer" back="GlobalLogic (Healthcare Domain)" />
-          </div>
-          <div data-aos="zoom-in" data-aos-delay="100">
-            <FlipCard front="🧠 Problem Solver" back="1000+ DSA Questions" />
-          </div>
-          <div data-aos="zoom-in" data-aos-delay="200">
-            <FlipCard front="🌐 Full Stack Dev" back="React, Node.js, MongoDB" />
-          </div>
-        </div> */}
-
+        
 
         {/* Flip Cards */}
 <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 mb-16">
