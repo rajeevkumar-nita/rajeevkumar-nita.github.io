@@ -1,0 +1,34 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Reset default spacing & font */
+body {
+  @apply m-0 p-0 font-sans bg-white text-gray-800;
+}
+
+/* Typography fixes */
+h1, h2, h3, h4, h5, h6 {
+  @apply font-bold text-gray-900;
+}
+
+/* Anchor style */
+a {
+  @apply text-blue-600 hover:text-blue-800 font-medium underline-offset-2;
+}
+
+/* Reusable input class for form fields */
+.input {
+  @apply w-full px-4 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-400;
+}
+
+/* Button styles */
+button {
+  @apply inline-block rounded px-6 py-2 font-medium transition-colors duration-200;
+}
+
+
+
+
+
+
