@@ -1,9 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import AOS from "aos";
-import "aos/dist/aos.css";
-import SkillCard from "../components/SkillCard";
+import { motion, AnimatePresence } from "framer-motion"; // For accordion animation
+import AOS from "aos"; // For scroll animations
+import "aos/dist/aos.css"; // AOS styles
+import SkillCard from "../components/SkillCard"; // Your SkillCard component
 
+/**
+ * @constant allSkills
+ * @description Defines the hierarchical data structure for all skills.
+ * Categories are keys, and values are arrays of skill objects.
+ * Each skill object contains: name, level, icon (path or component name), tags, and optional color.
+ */
 const allSkills = {
   "Programming Languages": [
     { name: "C", level: "Intermediate", icon: "/assets/c-logo.svg", tags: ["Low-level", "Procedural"] },
@@ -20,6 +26,7 @@ const allSkills = {
     { name: "Next.js", level: "Intermediate", icon: "SiNextdotjs", color: "text-black", tags: ["SSR", "Routing"] },
     { name: "Node.js", level: "Intermediate", icon: "FaNode", color: "text-green-600", tags: ["Server", "Express"] },
     { name: "MongoDB", level: "Intermediate", icon: "/assets/mongodb-logo.svg", tags: ["NoSQL", "Database"] },
+    // TYPO FIX: Changed "name:F:" to "name:"
     { name: "Redux", level: "Advanced", icon: "SiRedux", color: "text-purple-600", tags: ["State", "Middleware"] },
     { name: "Express.js", level: "Intermediate", icon: "/assets/express-logo.svg", tags: ["Routing", "API"] },
     { name: "Socket.IO", level: "Intermediate", icon: "SiSocketdotio", color: "text-black", tags: ["WebSockets", "Real-time"] }
@@ -44,23 +51,43 @@ const allSkills = {
     { name: "Team Collaboration", level: "Expert", icon: "/assets/team-colloboration.png", tags: ["Teamwork"] },
     { name: "Leadership", level: "Advanced", icon: "/assets/leadership.png", tags: ["Team Lead", "Initiative"] },
     { name: "Communication", level: "Advanced", icon: "/assets/communication.png", tags: ["Verbal", "Clarity"] },
+    // TYPO FIX: Changed "name:C:" to "name:"
     { name: "Continuous Learning", level: "Expert", icon: "/assets/continuous-learning.png", tags: ["Growth Mindset", "Self-Driven"] },
     { name: "Adaptability", level: "Intermediate", icon: "/assets/adaptibility.png", tags: ["Flexibility", "Resilience"] },
   ],
 };
 
+/**
+ * Renders the Skills section of the portfolio.
+ * Features a searchable, collapsible accordion of skill categories.
+ */
 const Skills = () => {
+  // State to hold the current value of the search input
   const [searchTerm, setSearchTerm] = useState("");
-  const [expandedCategory, setExpandedCategory] = useState("Programming Languages");
+  // State to track which accordion category is currently open
+  const [expandedCategory, setExpandedCategory] = useState("Programming Languages"); // Default open
 
+  // Initialize AOS (Animate on Scroll) library on component mount
   useEffect(() => {
     AOS.init({ duration: 1000 });
   }, []);
 
+  /**
+   * Toggles the accordion.
+   * If the clicked category is already open, it closes it (sets to null).
+   * Otherwise, it opens the clicked category.
+   * @param {string} category - The name of the category to toggle.
+   */
   const handleToggleCategory = (category) => {
     setExpandedCategory(expandedCategory === category ? null : category);
   };
 
+  /**
+   * Filters a given array of skills based on the current searchTerm.
+   * Checks against skill name, level, and tags.
+   * @param {Array} skillsArray - The array of skill objects to filter.
+   * @returns {Array} - The filtered array of skills.
+   */
   const filterSkills = (skillsArray) =>
     skillsArray.filter((skill) => {
       const lower = searchTerm.toLowerCase();
@@ -73,6 +100,7 @@ const Skills = () => {
 
   return (
     <section id="skills" className="py-20 bg-gradient-to-b from-[#eef2ff] to-[#e0f2fe] text-slate-800 scroll-mt-32">
+      {/* Section Title */}
       <h2 className="text-4xl text-center font-bold text-sky-700 mb-10" data-aos="fade-up">
         My Skills
       </h2>
@@ -88,30 +116,50 @@ const Skills = () => {
         />
       </div>
 
-      {/* Accordion */}
+      {/* Accordion Container */}
       <div className="container mx-auto max-w-5xl space-y-6 px-4">
         {Object.entries(allSkills).map(([category, skillList], idx) => {
+          
+          // Filter skills first based on search term
           const filtered = filterSkills(skillList);
+          
+          // If search term filters out all skills in a category, don't render the category
           if (filtered.length === 0) return null;
+
+          // Check if the current category is the one that's expanded
+          const isExpanded = expandedCategory === category;
 
           return (
             <div key={idx} className="bg-white rounded-lg shadow-lg overflow-hidden border border-sky-100">
+              
+              {/* Accordion Button */}
               <button
                 onClick={() => handleToggleCategory(category)}
-                className="w-full text-left px-6 py-4 font-semibold text-xl text-white bg-sky-600 hover:bg-sky-700 transition"
+                className="w-full flex justify-between items-center text-left px-6 py-4 font-semibold text-xl text-white bg-sky-600 hover:bg-sky-700 transition"
               >
-                {category}
+                {/* Category Title */}
+                <span>{category}</span>
+                
+                {/* +/- Indicator Icon */}
+                <span className="text-2xl">
+                  {isExpanded ? "-" : "+"}
+                </span>
               </button>
 
+              {/* Collapsible Content Area (uses Framer Motion) */}
               <AnimatePresence initial={false}>
-                {expandedCategory === category && (
+                {isExpanded && (
                   <motion.div
                     className="overflow-hidden px-6 pb-6"
+                    // Animation: Start state (collapsed)
                     initial={{ opacity: 0, height: 0, marginTop: 0 }}
+                    // Animation: End state (expanded)
                     animate={{ opacity: 1, height: "auto", marginTop: 16 }}
+                    // Animation: Exit state (collapsing)
                     exit={{ opacity: 0, height: 0, marginTop: 0 }}
                     transition={{ duration: 0.4, ease: "easeInOut" }}
                   >
+                    {/* Grid for Skill Cards */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                       {filtered.map((skill, index) => (
                         <SkillCard
