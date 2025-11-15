@@ -87,12 +87,12 @@ const About = () => {
 
         {/* Footer Quote */}
         <p
-          className="mt-16 text-base italic text-slate-500 dark:text-slate-500"
-          data-aos="fade-in"
-          data-aos-delay="100"
-        >
-          “Code. Build. Evolve.”
-        </p>
+  className="mt-16 text-base italic text-slate-500 dark:text-slate-400"
+  data-aos="fade-in"
+  data-aos-delay="100"
+>
+  “Code. Build. Evolve.”
+</p>
       </div>
     </section>
   );
