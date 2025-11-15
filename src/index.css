@@ -27,8 +27,41 @@ button {
   @apply inline-block rounded px-6 py-2 font-medium transition-colors duration-200;
 }
 
+/*
+  ==========================================
+  Dark Mode Styles for React-Slick Carousel
+  ==========================================
+*/
+.dark .slick-dots li button:before {
+  /* Change color of inactive dots to light gray in dark mode */
+  color: rgb(156 163 175); /* Tailwind's 'slate-400' */
+  opacity: 0.75;
+}
 
+.dark .slick-dots li.slick-active button:before {
+  /* Change color of the active dot to sky blue in dark mode */
+  color: rgb(56 189 248); /* Tailwind's 'sky-400' */
+  opacity: 1;
+}
 
+/*
+  ======================================================
+  Dark Mode Styles for React-Vertical-Timeline
+  (This is the new code you are adding)
+  ======================================================
+*/
+.dark .vertical-timeline-element-content {
+  /* Changes the card background and main text color */
+  background: #1e293b; /* slate-800 */
+  color: #cbd5e1; /* slate-300 */
+}
 
+.dark .vertical-timeline-element-content-arrow {
+  /* Changes the card's arrow color to match the card */
+  border-right-color: #1e293b; /* slate-800 */
+}
 
-
+.dark .vertical-timeline-element-content .vertical-timeline-element-date {
+  /* Changes the date text color */
+  color: #94a3b8; /* slate-400 */
+}
