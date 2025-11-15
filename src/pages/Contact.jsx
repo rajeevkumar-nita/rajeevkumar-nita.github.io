@@ -1,35 +1,31 @@
-
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
+import { useForm, ValidationError } from '@formspree/react'; 
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { FaLinkedin, FaEnvelope } from 'react-icons/fa';
 
 const Contact = () => {
-  const [message, setMessage] = useState('');
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [error, setError] = useState('');
-  const [success, setSuccess] = useState('');
-
   useEffect(() => {
     AOS.init({ duration: 1000, once: true });
   }, []);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (!name || !email || !message) {
-      setError('All fields are required.');
-      setTimeout(() => setError(''), 3000);
-      return;
-    }
+  const [state, handleSubmit] = useForm("xpwkdroz"); 
 
-    setSuccess('Message sent successfully!');
-    setTimeout(() => setSuccess(''), 3000);
-
-    setMessage('');
-    setName('');
-    setEmail('');
-  };
+  if (state.succeeded) {
+    return (
+      <section
+        id="contact"
+        className="py-20 bg-gradient-to-b from-[#eef2ff] to-[#e0f2fe] text-slate-800 scroll-mt-32"
+      >
+        <div className="container mx-auto px-4 text-center max-w-2xl">
+          <div className="bg-white p-8 rounded-lg shadow-md">
+            <h3 className="text-3xl font-bold text-sky-700 mb-4">Thanks for your message!</h3>
+            <p className="text-lg text-slate-600">I'll get back to you soon.</p>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section
@@ -45,68 +41,79 @@ const Contact = () => {
           Contact Me
         </h2>
 
-        {/* Contact Form */}
+       
         <form
           onSubmit={handleSubmit}
           className="max-w-2xl mx-auto bg-white p-8 rounded-lg shadow-md hover:scale-[1.02] transition-transform duration-300"
           data-aos="fade-up"
         >
-          {error && (
-            <div className="bg-red-500 text-white text-center py-2 mb-6 rounded-md">
-              {error}
-            </div>
-          )}
-
-          {success && (
-            <div className="bg-green-500 text-white text-center py-2 mb-6 rounded-md">
-              {success}
-            </div>
-          )}
+          <ValidationError 
+            errors={state.errors} 
+            className="bg-red-500 text-white text-center py-2 mb-6 rounded-md"
+          />
 
           <div className="mb-6">
             <input
               type="text"
+              name="name" 
               className="w-full p-4 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-sky-500 text-slate-800"
               placeholder="Your Name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
               required
+            />
+            <ValidationError 
+              prefix="Name" 
+              field="name" 
+              errors={state.errors} 
+              className="text-red-600 text-sm mt-1"
             />
           </div>
 
           <div className="mb-6">
             <input
               type="email"
+              name="email" 
               className="w-full p-4 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-sky-500 text-slate-800"
               placeholder="Your Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
               required
+            />
+            {/* Field-specific error */}
+            <ValidationError 
+              prefix="Email" 
+              field="email" 
+              errors={state.errors} 
+              className="text-red-600 text-sm mt-1"
             />
           </div>
 
           <div className="mb-6">
             <textarea
+              name="message" 
               className="w-full p-4 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-sky-500 text-slate-800"
               placeholder="Your Message"
               rows="6"
-              value={message}
-              onChange={(e) => setMessage(e.target.value)}
               required
+            />
+            {/* Field-specific error */}
+            <ValidationError 
+              prefix="Message" 
+              field="message" 
+              errors={state.errors} 
+              className="text-red-600 text-sm mt-1"
             />
           </div>
 
           <div className="text-center">
             <button
               type="submit"
-              className="w-full py-3 bg-sky-600 text-white font-semibold rounded-md hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-sky-500 transition-all"
+              disabled={state.submitting} 
+              className="w-full py-3 bg-sky-600 text-white font-semibold rounded-md hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-sky-500 transition-all
+                         disabled:bg-slate-400 disabled:cursor-not-allowed"
             >
-              Send Message
+              {state.submitting ? "Sending..." : "Send Message"}
             </button>
           </div>
         </form>
 
-        {/* Quick Contact Buttons (inline for mobile) */}
         <div
           className="flex flex-wrap justify-center sm:flex-row sm:gap-6 gap-4 mt-10 text-sm sm:text-base"
           data-aos="fade-up"
