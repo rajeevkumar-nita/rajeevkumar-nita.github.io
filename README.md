@@ -10,3 +10,23 @@ Currently, two official plugins are available:
 ## Expanding the ESLint configuration
 
 If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+
+---
+
+## 🚀 Deployment Fix (Vercel/Netlify)
+
+If you encounter a **404 Not Found** error when refreshing pages (like `/blog` or `/projects`) on the live site, it means the server can't handle client-side routing.
+
+**Solution:**
+1. Create a file named `vercel.json` in the root directory.
+2. Paste the following code inside it:
+
+```json
+{
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/"
+    }
+  ]
+}
