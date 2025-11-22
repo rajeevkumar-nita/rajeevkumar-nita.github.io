@@ -1,0 +1,29 @@
+# ========================================================
+# ROBOTS.TXT - Guide for Search Engine Bots (Spiders)
+# ========================================================
+
+# 1. "User-agent: *"
+# Iska matlab hai ki ye rules Duniye ke SABHI search engines ke liye hain.
+# (Google, Bing, Yahoo, DuckDuckGo, etc.)
+User-agent: *
+
+# 2. "Allow: /"
+# Hum bots ko permission de rahe hain ki wo website ke
+# HAR page ko scan (crawl) kar sakte hain.
+Allow: /
+
+# 3. "Disallow: " (Optional Safety)
+# Agar koi private folder hota (jaise /admin), toh hum use yahan likhte
+# taaki Google use search result mein na dikhaye.
+# Abhi ke liye humne kuch block nahi kiya hai.
+
+# 4. "Sitemap Location"
+# Ye sabse important line hai. Ye bot ko batata hai ki
+# "Mere ghar ka naksha (Map) yahan rakha hai, isse follow karo."
+# (Apni website ka sahi link yahan ensure karein)
+Sitemap: https://rajeev-portfolio-delta.vercel.app/sitemap.xml
+```
+
+### **Step 3: Push to GitHub**
+File save karne ke baad, isse live karne ke liye terminal mein ye commands chalao:
+
