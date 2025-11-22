@@ -116,6 +116,7 @@
 
 import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import SEO from './components/SEO';
 import ReactGA from "react-ga4"; // Google Analytics Import
 
 // Components Import
@@ -161,6 +162,14 @@ const App = () => {
 
   return (
     <div className="font-sans text-gray-800">
+         {/* --- 2. SEO COMPONENT YAHAN LAGAYA --- */}
+      <SEO 
+        title="Home"
+        description="Portfolio of Rajeev Kumar - A Software Engineer specializing in Full-Stack Web Development (React, Node.js) and Android. Explore my projects, skills, and experience."
+        keywords={['Rajeev Kumar', 'Software Engineer', 'Full Stack Developer', 'React', 'Node.js', 'Portfolio']}
+        url={window.location.href}
+      />
+      
       {/* Header Section */}
       <Header />
 

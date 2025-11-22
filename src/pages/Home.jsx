@@ -57,7 +57,7 @@ const Home = () => {
           data-aos-delay="100"
         >
           <Typewriter
-            words={["Full-Stack Enthusiast", "Android Developer", "Problem Solver"]}
+            words={["Full-Stack Developer", "Android Developer", "Problem Solver"]}
             loop={0}
             cursor
             cursorStyle="|"
