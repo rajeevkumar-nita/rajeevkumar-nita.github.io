@@ -22,8 +22,5 @@ Allow: /
 # "Mere ghar ka naksha (Map) yahan rakha hai, isse follow karo."
 # (Apni website ka sahi link yahan ensure karein)
 Sitemap: https://rajeev-portfolio-delta.vercel.app/sitemap.xml
-```
 
-### **Step 3: Push to GitHub**
-File save karne ke baad, isse live karne ke liye terminal mein ye commands chalao:
 
