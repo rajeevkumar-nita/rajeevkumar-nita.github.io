@@ -28,7 +28,7 @@ const Home = () => {
       <div className="max-w-6xl mx-auto px-4">
         {/* Profile Image */}
         <img
-  src="/assets/Rajeev_kumar.jpg"
+  src="/assets/rajeev-profile.webp"
   alt="Rajeev Kumar"
   className="w-32 h-32 rounded-full mx-auto mb-6 border-4 border-white transform transition-all duration-500 ease-in-out
              hover:scale-110 hover:rotate-3 hover:brightness-110 hover:shadow-2xl
