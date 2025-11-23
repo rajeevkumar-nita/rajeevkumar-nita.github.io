@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+/* --- FIX FOR HORIZONTAL SCROLL --- */
+html, body {
+  overflow-x: hidden;
+  width: 100%;
+}
+
 /* Reset default spacing & font */
 body {
   @apply m-0 p-0 font-sans bg-white text-gray-800;
@@ -47,7 +53,6 @@ button {
 /*
   ======================================================
   Dark Mode Styles for React-Vertical-Timeline
-  (This is the new code you are adding)
   ======================================================
 */
 .dark .vertical-timeline-element-content {
