@@ -216,6 +216,7 @@ const Skills = lazy(() => import('./pages/Skills'));
 const Achievements = lazy(() => import('./pages/Achievements'));
 const Responsibility = lazy(() => import('./pages/Responsibility'));
 const Contact = lazy(() => import('./pages/Contact'));
+import AiChatWidget from './components/AiChatWidget';
 
 // Initialize GA
 ReactGA.initialize("G-0QQ7WH1K3Z");
@@ -273,6 +274,10 @@ const App = () => {
           <Achievements id="achievements" />
           <Responsibility id="responsibility" />
           <Contact id="contact" />
+        </Suspense>
+        {/* AI Chat Widget - Lazy Load inside main to avoid blocking initial render */}
+        <Suspense fallback={null}>
+          <AiChatWidget />
         </Suspense>
       </main>
 
