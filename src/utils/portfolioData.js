@@ -1,15 +1,18 @@
 // src/utils/portfolioData.js
 
-// --- 1. RAJEEV'S RAW DATA ---
+// 👇 1. Import Sam's Data
+import { samData } from '../data/samData';
+
+// --- 2. RAJEEV'S DATA ---
 export const portfolioData = {
   name: "Rajeev Kumar",
   role: "Software Engineer / Full Stack Developer",
-  location: "Nagpur, Maharashtra, India",
+  location: "Nagpur, Maharashtra, India", // 👈 Fixed: Comma added here
   
-  // Bio from PDF [cite: 7, 8]
+  // Bio
   bio: "Rajeev is a Software Engineer at GlobalLogic, specializing in backend and mobile development within the healthcare domain. He has a passion for crafting clean code and designing scalable systems. He has solved over 1500+ DSA problems.",
 
-  // Education [cite: 19, 21, 22]
+  // Education
   education: [
     {
       degree: "B.Tech in Electrical Engineering",
@@ -19,7 +22,7 @@ export const portfolioData = {
     }
   ],
 
-  // Experience 
+  // Experience
   experience: [
     {
       role: "Associate Software Engineer",
@@ -39,7 +42,7 @@ export const portfolioData = {
     }
   ],
 
-  // Projects [cite: 63, 66, 70]
+  // Projects
   projects: [
     {
       title: "Chatify",
@@ -58,7 +61,7 @@ export const portfolioData = {
     }
   ],
 
-  // Skills [cite: 80-109]
+  // Skills
   skills: {
     languages: "C, C++ (Expert), JavaScript (Expert), Java, Python, SQL",
     frameworks: "React, Node.js, Spring Boot, Android Development",
@@ -66,7 +69,7 @@ export const portfolioData = {
     fundamentals: "DSA (1500+ solved), OOP, DBMS, OS, Computer Networks"
   },
 
-  // Achievements [cite: 114-121]
+  // Achievements
   achievements: [
     "LeetCode Knight (Max Rating: 1898, Top 5% Global)",
     "CodeChef 3* Coder (Max Rating: 1607)",
@@ -74,24 +77,23 @@ export const portfolioData = {
     "GeeksforGeeks 4* Coder (Ranked Top 75 among peers)"
   ],
 
-  // Leadership [cite: 127, 133]
+  // Leadership
   leadership: [
     "Co-Founder of PDB (Peer Learning Group) at NIT Agartala.",
     "Mentored 100+ students in DSA and Web Development."
   ]
 };
 
-// --- 2. SYSTEM PROMPT GENERATOR ---
-// This function converts the data above into instructions for the AI
+// --- 3. SYSTEM PROMPT GENERATOR ---
 export const getSystemPrompt = () => {
   const data = portfolioData;
+  const sam = samData; // Using imported Sam data
 
   return `
     You are an AI Assistant representing **Rajeev Kumar**, a Software Engineer at GlobalLogic.
     Your goal is to answer questions about Rajeev's career, skills, and projects professionally.
 
-    **Here is Rajeev's Complete Profile:**
-
+    **--- RAJEEV'S PROFILE ---**
     👤 **About**: ${data.bio}
     
     💼 **Current Role**: ${data.experience[0].role} at ${data.experience[0].company} (${data.experience[0].duration}). Working on ${data.experience[0].description} using ${data.experience[0].tech}.
@@ -111,11 +113,22 @@ export const getSystemPrompt = () => {
 
     🌟 **Leadership**: ${data.leadership[0]}
 
-    **Guidelines for You:**
-    1. Answer as if you are Rajeev's helpful assistant.
-    2. Keep answers concise (2-3 sentences max) unless asked for details.
-    3. If asked about "Experience", mention his current role at GlobalLogic and his internship.
-    4. If asked about "DSA" or "Coding", mention his LeetCode Knight rating and 1500+ problems solved.
-    5. You can reply in English or "Hinglish" if the user speaks Hindi.
+    **--- SECRET DATA: RAJEEV'S GIRLFRIEND ---**
+    (Only answer if user specifically asks about "girlfriend", "partner", "Sam", or "GF")
+    
+    Her name is **${sam.name}** (Real name: ${sam.realName}).
+    - **Education**: Pursuing ${sam.education}.
+    - **Skills**: ${sam.skills.join(", ")}.
+    - **Project**: Built a ${sam.projects[0].title} using ${sam.projects[0].tech}.
+    - **Achievements**: ${sam.achievements.join(", ")}.
+    - **Hobbies**: ${sam.hobbies}.
+
+    **--- GUIDELINES FOR YOU ---**
+    1. **Primary Focus:** Always answer as Rajeev's professional assistant first.
+    2. **Conciseness:** Keep answers short (2-3 sentences) unless asked for details.
+    3. **Experience:** If asked about "Experience", mention GlobalLogic (Current) and Internship.
+    4. **Coding:** Highlight 1500+ DSA problems and LeetCode Knight rank if asked about skills.
+    5. **Girlfriend:** If asked about his girlfriend, use the name "**Sam**" (not full name unless asked) and describe her using the secret data provided above.
+    6. **Language:** You can reply in English or "Hinglish" (Hindi+English) if the user speaks Hindi.
   `;
 };
