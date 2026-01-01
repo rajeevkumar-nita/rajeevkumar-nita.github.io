@@ -3,6 +3,7 @@ import { FaGithub, FaLinkedin, FaInstagram, FaEnvelope } from "react-icons/fa";
 import { Typewriter } from "react-simple-typewriter";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import SEO from "../components/SEO";
 
 // Reusable social link config
 const socialLinks = [
@@ -21,6 +22,18 @@ const Home = () => {
   }, []);
 
   return (
+     <>
+    <SEO
+      title="Rajeev Kumar | Software Engineer | NIT Agartala | GlobalLogic"
+      description="Rajeev Kumar is a Software Engineer from NIT Agartala, currently working at GlobalLogic. Full-Stack & Android Developer."
+      keywords={[
+        "Rajeev Kumar NIT Agartala",
+        "Rajeev Kumar Software Engineer",
+        "Rajeev Kumar GlobalLogic",
+        "NIT Agartala Developer",
+        "Rajeev Kumar Portfolio",
+      ]}
+    />
     <section
       id="home"
       className="bg-gradient-to-r from-[#6A11CB] to-[#2575FC] text-white text-center py-20 scroll-mt-32 relative"
@@ -29,7 +42,7 @@ const Home = () => {
         {/* Profile Image */}
         <img
   src="/assets/rajeev_kumar1.jpeg"
-  alt="Rajeev Kumar"
+   alt="Rajeev Kumar - Software Engineer from NIT Agartala"
   className="w-32 h-32 rounded-full mx-auto mb-6 border-4 border-white transform transition-all duration-500 ease-in-out
              hover:scale-110 hover:rotate-3 hover:brightness-110 hover:shadow-2xl
              hover:ring-4 hover:ring-yellow-300 hover:ring-offset-2 hover:ring-offset-blue-600"
@@ -40,6 +53,10 @@ const Home = () => {
         <h1 className="text-4xl sm:text-5xl font-bold mb-2 text-white drop-shadow-lg" data-aos="fade-up">
           Hello, I'm <span className="text-yellow-300">Rajeev Kumar!</span>
         </h1>
+        <p className="text-sm sm:text-base text-white/80 mt-1 italic">
+             Alumnus of National Institute of Technology, Agartala (NIT Agartala)
+        </p>
+
 
              {/* 🔹 New Role Line */}
         <p
@@ -120,6 +137,8 @@ const Home = () => {
         </div>
       </div>
     </section>
+    </>
+
   );
 };
 
