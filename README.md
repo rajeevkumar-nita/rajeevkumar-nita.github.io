@@ -72,8 +72,8 @@ Create a file named vercel.json in the root directory and add:
 
 ## 👤 Author
 
-Rajeev Kumar
-Software Engineer | NIT Agartala | GlobalLogic
-GitHub: https://github.com/rajeevkumar-nita
-LinkedIn: https://www.linkedin.com/in/rajeevkumar-nita
-Email: rajeev.nita2025@gmail.com
+Rajeev Kumar  
+Software Engineer | NIT Agartala | GlobalLogic  
+GitHub: https://github.com/rajeevkumar-nita  
+LinkedIn: https://www.linkedin.com/in/rajeevkumar-nita  
+Email: rajeev.nita2025@gmail.com  
