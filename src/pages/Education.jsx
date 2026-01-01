@@ -45,26 +45,7 @@ const Education = () => {
                 <p className="mt-4 text-gray-800 font-medium">2021 - 2025</p>
               </div>
             </div>
-
-            {/* 12th */}
-            <div>
-              <div className="max-w-md mx-auto bg-white p-6 rounded-lg shadow-lg">
-                <h3 className="text-xl font-semibold text-gray-800">R.R.M.Y. Inter College, Sitamarhi</h3>
-                <p className="mt-2 text-gray-600">Intermediate - Bihar School Examination Board</p>
-                <p className="text-gray-600 mt-1">Percentage: 80.4%</p>
-                <p className="mt-4 text-gray-800 font-medium">2017 - 2019</p>
-              </div>
-            </div>
-
-            {/* 10th */}
-            <div>
-              <div className="max-w-md mx-auto bg-white p-6 rounded-lg shadow-lg">
-                <h3 className="text-xl font-semibold text-gray-800">MVG High School, Manikchouk</h3>
-                <p className="mt-2 text-gray-600">Matriculation - Bihar School Examination Board</p>
-                <p className="text-gray-600 mt-1">Percentage: 71%</p>
-                <p className="mt-4 text-gray-800 font-medium">2016 - 2017</p>
-              </div>
-            </div>
+           
           </Slider>
         </div>
       </div>
