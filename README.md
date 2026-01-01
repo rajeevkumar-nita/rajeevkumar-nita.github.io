@@ -1,27 +1,65 @@
-# React + Vite
+# Rajeev Kumar – Software Engineer Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+🚀 Personal portfolio website of **Rajeev Kumar**,  
+Software Engineer | NIT Agartala | GlobalLogic  
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Live: https://rajeevkumar-nita.github.io
 
 ---
 
-## 🚀 Deployment Fix (Vercel/Netlify)
+## 👋 About Me
 
-If you encounter a **404 Not Found** error when refreshing pages (like `/blog` or `/projects`) on the live site, it means the server can't handle client-side routing.
+I am **Rajeev Kumar**, a Software Engineer and alumnus of  
+**National Institute of Technology, Agartala (NIT Agartala)**.
 
-**Solution:**
-1. Create a file named `vercel.json` in the root directory.
-2. Paste the following code inside it:
+Currently working at **GlobalLogic**, I specialize in:
+- Full-Stack Web Development
+- React & Modern JavaScript
+- Android Development
+- Problem Solving & DSA
 
-```json
+This portfolio showcases my projects, skills, experience, and achievements.
+
+---
+
+## 🛠️ Tech Stack
+
+- **Frontend:** React, Vite, Tailwind CSS
+- **Animations:** AOS (Animate On Scroll)
+- **SEO:** React Helmet Async, Meta Tags, Open Graph
+- **Deployment:** GitHub Pages / Vercel
+- **Tools:** Git, GitHub
+
+---
+
+## ✨ Features
+
+- SEO-optimized personal branding
+- Responsive design (mobile-first)
+- Animated UI with smooth transitions
+- Social links (GitHub, LinkedIn, LeetCode, Codeforces, GFG)
+- Clean, modular component structure
+
+---
+
+## 📦 Getting Started (Local Setup)
+
+```bash
+git clone https://github.com/rajeevkumar-nita/rajeevkumar-nita.github.io.git
+cd rajeevkumar-nita.github.io
+npm install
+npm run dev
+````
+
+
+## 🚀 Deployment Notes
+⚠️ 404 Issue on Page Refresh
+
+If you encounter a 404 Not Found error when refreshing routes like /projects or /blog,
+it is due to client-side routing in React.
+
+Create a file named vercel.json in the root directory and add:
+```bash
 {
   "rewrites": [
     {
@@ -30,5 +68,12 @@ If you encounter a **404 Not Found** error when refreshing pages (like `/blog` o
     }
   ]
 }
+````
 
-**Rajeev kumar**
+## 👤 Author
+
+Rajeev Kumar
+Software Engineer | NIT Agartala | GlobalLogic
+GitHub: https://github.com/rajeevkumar-nita
+LinkedIn: https://www.linkedin.com/in/rajeevkumar-nita
+Email: rajeev.nita2025@gmail.com
