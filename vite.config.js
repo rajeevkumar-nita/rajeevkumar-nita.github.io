@@ -1,46 +1,19 @@
-// import { defineConfig } from 'vite'
-// import react from '@vitejs/plugin-react'
-
-// // https://vite.dev/config/
-// export default defineConfig({
-//   plugins: [react()],
-// })
-
-
-
-
-// import { defineConfig } from 'vite'
-// import react from '@vitejs/plugin-react'
-
-// // https://vite.dev/config/
-// export default defineConfig({
-//   plugins: [react()],
-//   build: {
-//     rollupOptions: {
-//       output: {
-//         manualChunks: {
-//           // separating core framework libraries into their own file
-//           vendor: ['react', 'react-dom', 'react-router-dom'],
-//           // separating animation libraries if you use them (common in portfolios)
-//           animations: ['framer-motion'], 
-//         },
-//       },
-//     },
-//   },
-// })
-
-
-
-
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
-// https://vite.dev/config/
+
 export default defineConfig({
   plugins: [react()],
+  
+  // this block is added to configure the development server on mobile devices
+  server: {
+    host: true, // Isse 'Network' link enable ho jayega
+    port: 5173,
+    strictPort: true, // Agar 5173 busy ho toh error dega, port badlega nahi
+  },
+
   build: {
     // 1. Disable source maps for production (Fixes Lighthouse "Missing Source Maps" warning)
-    // Note: Ye sirf debugging files hatata hai. SEO par koi galat asar nahi padega.
     sourcemap: false,
 
     // 2. Code Splitting Settings (Performance Optimization)
