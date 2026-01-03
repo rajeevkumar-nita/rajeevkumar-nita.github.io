@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { FaGithub, FaLinkedin, FaInstagram, FaEnvelope } from "react-icons/fa";
+import { FaGithub, FaLinkedin, FaInstagram, FaEnvelope, FaTwitter } from "react-icons/fa";
 import { Typewriter } from "react-simple-typewriter";
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -9,6 +9,7 @@ import SEO from "../components/SEO";
 const socialLinks = [
   { href: "https://github.com/rajeevkumar-nita", icon: <FaGithub />, label: "GitHub" },
   { href: "https://www.linkedin.com/in/rajeevkumar-nita", icon: <FaLinkedin />, label: "LinkedIn" },
+  { href: "https://x.com/rajeevbuilds", icon: <FaTwitter />, label: "Twitter" }, 
   { href: "https://www.instagram.com/rajeev_kmr77/", icon: <FaInstagram />, label: "Instagram" },
   { href: "https://leetcode.com/u/Winter_Soldier_2002/", img: "/assets/leetcode-logo.svg", label: "LeetCode" },
   { href: "https://codeforces.com/profile/Lucifer204?mobile=false", img: "/assets/codeforces-logo.svg", label: "Codeforces" },
