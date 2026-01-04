@@ -6,6 +6,7 @@ import {
   FaEnvelope,
   FaArrowUp,
 } from 'react-icons/fa';
+import { FaXTwitter } from 'react-icons/fa6';
 
 /**
  * Renders the site-wide footer and a scroll-to-top button.
@@ -86,6 +87,16 @@ const Footer = () => {
             >
               <FaLinkedin />
             </a>
+            {/* Twitter (X) - Naya Link yaha hai */}
+  <a
+    href="https://x.com/rajeevbuilds"
+    target="_blank"
+    rel="noopener noreferrer"
+    title="X (Twitter)"
+    className="bg-white dark:bg-slate-700 text-black dark:text-white p-3 rounded-full shadow hover:bg-gray-200 dark:hover:bg-slate-600 transition"
+  >
+    <FaXTwitter />
+  </a>
             {/* Instagram: Added dark mode background, text, and hover */}
             <a
               href="https://www.instagram.com/rajeev_kmr77/"
