@@ -127,7 +127,7 @@ const AiChatWidget = () => {
                <span className="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
              </span>
           </div>
-          <span className="font-semibold text-sm">Ask AI Agent</span>
+          
         </button>
       )}
     </div>
