@@ -13,7 +13,7 @@ const socialLinks = [
   { href: "https://leetcode.com/u/Winter_Soldier_2002/", img: "/assets/leetcode-logo.svg", label: "LeetCode" },
   { href: "https://codeforces.com/profile/Lucifer204?mobile=false", img: "/assets/codeforces-logo.svg", label: "Codeforces" },
   { href: "https://www.geeksforgeeks.org/user/rjalgorithmyatras/", img: "/assets/gfg-logo.jpeg", label: "GFG" },
-  { href: "https://www.codechef.com/users/rajeev_kmr77", img: "/assets/codechef-logo.svg", label: "CodeChef" },
+  { href: "https://www.codechef.com/users/rjalgo", img: "/assets/codechef-logo.svg", label: "CodeChef" },
 ];
 
 const Home = () => {
