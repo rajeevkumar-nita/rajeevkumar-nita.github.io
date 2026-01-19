@@ -46,10 +46,10 @@ const About = () => {
         {/* Flip Cards */}
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 mb-16">
           <div data-aos="zoom-in" data-aos-delay="0">
-            <FlipCard front="🌐 MERN Stack Dev" back="React, Node.js, MongoDB" />
+            <FlipCard front="🌐 Full-Stack Engineer" back="React, Node.js, TypeScript" />
           </div>
           <div data-aos="zoom-in" data-aos-delay="100">
-            <FlipCard front="📱 Android Developer" back="Java & Kotlin" />
+            <FlipCard front="🚀 Product Builder" back="Founder of PulsePeek (AI Health Platform)" />
           </div>
           <div data-aos="zoom-in" data-aos-delay="200">
             <FlipCard front="🧠 Problem Solver" back="1500+ DSA Questions" />
