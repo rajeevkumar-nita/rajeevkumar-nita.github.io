@@ -37,12 +37,10 @@ const About = () => {
   I’m also the <strong className="text-green-600 dark:text-green-400">Founder of PulsePeek</strong> — an AI-powered personal health companion focused on{" "}
   <strong className="text-sky-700 dark:text-sky-400">safe, explainable, and privacy-first health insights</strong>.
   <br /><br />
-          Passionate about{" "}
-          <strong className="text-sky-700 dark:text-sky-400">clean code</strong>,{" "}
-          <strong className="text-green-600 dark:text-green-400">scalable systems</strong>, and{" "}
-          <strong className="text-indigo-700 dark:text-indigo-400">real-world problem solving</strong>. I’ve solved{" "}
-          <strong className="dark:text-slate-100">1500+ DSA problems</strong> and built projects using{" "}
-          <strong className="dark:text-slate-100">React, Node.js,</strong> and <strong className="dark:text-slate-100">Spring Boot</strong>.
+           I enjoy building <strong className="text-indigo-700 dark:text-indigo-400">real-world products</strong> that balance{" "}
+  <strong>engineering, UX, and user trust</strong>. I’ve solved{" "}
+  <strong className="dark:text-slate-100">1500+ DSA problems</strong> and work with{" "}
+  <strong className="dark:text-slate-100">React, Node.js, Spring Boot</strong>, and modern AI systems.
         </p>
 
         {/* Flip Cards */}
