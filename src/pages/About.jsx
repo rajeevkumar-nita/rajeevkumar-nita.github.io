@@ -66,7 +66,7 @@ const About = () => {
           </div>
           <div className="text-lg font-medium" data-aos="fade-up" data-aos-delay="100">
             <div className="text-4xl font-extrabold text-green-600 dark:text-green-400">
-              <CountUp end={15} duration={2} />+
+              <CountUp end={25} duration={2} />+
             </div>
             <div className="text-slate-700 dark:text-slate-400">Projects</div>
           </div>
