@@ -74,7 +74,7 @@ const Home = () => {
           data-aos-delay="100"
         >
           <Typewriter
-            words={["Full-Stack Developer", "Android Developer", "Problem Solver"]}
+            words={["Full-Stack Developer", "Android Developer", "Problem Solver",   "Founder • PulsePeek (AI Health Platform)"]}
             loop={0}
             cursor
             cursorStyle="|"
@@ -83,6 +83,14 @@ const Home = () => {
             delaySpeed={1500}
           />
         </h2>
+        <p
+  className="mt-3 text-white/85 text-sm sm:text-base max-w-2xl mx-auto"
+  data-aos="fade-up"
+  data-aos-delay="200"
+>
+  Building <span className="text-yellow-300 font-semibold">PulsePeek</span> — an AI-powered personal health companion that analyzes images, symptoms, and lifestyle data to deliver safe, explainable health guidance.
+</p>
+
 
         {/* Slogan */}
        <h3

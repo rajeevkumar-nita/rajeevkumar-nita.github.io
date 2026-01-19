@@ -33,7 +33,11 @@ const About = () => {
           I’m <strong className="text-slate-800 dark:text-slate-100">Rajeev Kumar</strong>, a{" "}
           <strong className="text-blue-700 dark:text-blue-400">Software Engineer at GlobalLogic</strong>{" "}
           working on backend and mobile development in the{" "}
-          <strong className="text-purple-700 dark:text-purple-400">healthcare domain</strong>. Passionate about{" "}
+          <strong className="text-purple-700 dark:text-purple-400">healthcare domain</strong>.  
+  I’m also the <strong className="text-green-600 dark:text-green-400">Founder of PulsePeek</strong> — an AI-powered personal health companion focused on{" "}
+  <strong className="text-sky-700 dark:text-sky-400">safe, explainable, and privacy-first health insights</strong>.
+  <br /><br />
+          Passionate about{" "}
           <strong className="text-sky-700 dark:text-sky-400">clean code</strong>,{" "}
           <strong className="text-green-600 dark:text-green-400">scalable systems</strong>, and{" "}
           <strong className="text-indigo-700 dark:text-indigo-400">real-world problem solving</strong>. I’ve solved{" "}
