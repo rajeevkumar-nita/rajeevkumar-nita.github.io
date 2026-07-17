@@ -1,6 +1,9 @@
 
 import React, { useEffect, Suspense, lazy } from 'react';
 import { useLocation } from 'react-router-dom';
+import { motion, useScroll, useSpring } from 'framer-motion';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 import SEO from './components/SEO';
 import ReactGA from "react-ga4"; 
 
@@ -33,6 +36,17 @@ const SectionLoader = () => (
 const App = () => {
   const location = useLocation();
 
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 120,
+    damping: 30,
+    restDelta: 0.001,
+  });
+
+  useEffect(() => {
+    AOS.init({ duration: 800, once: true, offset: 80 });
+  }, []);
+
   useEffect(() => {
     ReactGA.send({ 
       hitType: "pageview", 
@@ -54,6 +68,11 @@ const App = () => {
 
   return (
     <div className="font-sans text-gray-800">
+      {/* Scroll progress bar */}
+      <motion.div
+        style={{ scaleX }}
+        className="fixed top-0 left-0 right-0 h-1 z-[60] origin-left bg-gradient-to-r from-sky-500 via-violet-500 to-fuchsia-500"
+      />
       <SEO 
         title="Home"
         description="Portfolio of Rajeev Kumar - A Software Engineer specializing in Full-Stack Web Development (React, Node.js) and Android. Explore my projects, skills, and experience."

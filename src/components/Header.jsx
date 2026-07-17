@@ -41,7 +41,7 @@ const Header = () => {
             className={`fixed top-0 w-full z-50 transition-all duration-300 ${
                 scrolled
                     ? 'bg-white/90 backdrop-blur-md shadow-md dark:bg-slate-900/80 dark:border-b dark:border-slate-700'
-                    : 'bg-gradient-to-r from-white via-white to-blue-10t 00 dark:from-slate-900 dark:via-slate-900 dark:to-slate-800'
+                    : 'bg-gradient-to-r from-white via-white to-blue-100 dark:from-slate-900 dark:via-slate-900 dark:to-slate-800'
             }`}
         >
             <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">

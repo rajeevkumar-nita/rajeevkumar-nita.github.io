@@ -10,12 +10,12 @@ html, body {
 
 /* Reset default spacing & font */
 body {
-  @apply m-0 p-0 font-sans bg-white text-gray-800;
+  @apply m-0 p-0 font-sans bg-white text-gray-800 antialiased;
 }
 
 /* Typography fixes */
 h1, h2, h3, h4, h5, h6 {
-  @apply font-bold text-gray-900;
+  @apply font-display font-bold text-gray-900 tracking-tight;
 }
 
 /* Anchor style */
@@ -32,6 +32,34 @@ a {
 button {
   @apply inline-block rounded px-6 py-2 font-medium transition-colors duration-200;
 }
+
+/* Reusable gradient text utility */
+.text-gradient {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-sky-300 via-white to-violet-300;
+  background-size: 200% auto;
+}
+
+/* Animated gradient text (shimmer) */
+.text-gradient-animated {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-sky-400 via-violet-400 to-sky-400 animate-shimmer;
+  background-size: 200% auto;
+}
+
+/* Custom modern scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #3b82f6, #7c3aed);
+  border-radius: 9999px;
+}
+.dark ::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #38bdf8, #a78bfa);
+}
+
 
 /*
   ==========================================

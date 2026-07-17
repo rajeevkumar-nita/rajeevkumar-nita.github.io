@@ -13,17 +13,20 @@ const ProjectCard = ({ project, onViewDetails }) => {
   return (
     <div
       className={`
-        relative p-6 rounded-xl shadow-md border transform transition-all duration-300 
-        hover:scale-105 hover:shadow-xl flex flex-col justify-between
+        group relative p-6 rounded-2xl shadow-card border transform transition-all duration-300 
+        hover:scale-[1.03] hover:-translate-y-1 hover:shadow-glow flex flex-col justify-between overflow-hidden
         ${
           isGaming
-            ? "bg-gradient-to-br from-indigo-600 to-purple-600 text-white border-purple-400"
+            ? "bg-gradient-to-br from-indigo-600 to-purple-600 text-white border-purple-400/50"
             : "bg-white dark:bg-slate-800 border-sky-100 dark:border-slate-700"
         }
       `}
       data-aos={project.aos}
       data-aos-delay={project.aosDelay}
     >
+      {/* Hover glow accent */}
+      <div className="pointer-events-none absolute -inset-px rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-sky-500/10 via-transparent to-violet-500/10" />
+
       {/* ⭐ FEATURED BADGE */}
       {isFeatured && (
         <span
@@ -39,7 +42,7 @@ const ProjectCard = ({ project, onViewDetails }) => {
         </span>
       )}
 
-      <div>
+      <div className="relative z-10">
         {/* 🎮 Gaming Badge */}
         {isGaming && (
           <span className="inline-block mb-2 text-xs font-semibold bg-black/30 px-3 py-1 rounded-full">
@@ -70,7 +73,7 @@ const ProjectCard = ({ project, onViewDetails }) => {
         </p>
       </div>
 
-      <div className="mt-5 flex flex-col space-y-3">
+      <div className="relative z-10 mt-5 flex flex-col space-y-3">
         <button
           onClick={onViewDetails}
           className={`flex items-center justify-center gap-2 text-sm border px-4 py-2 rounded-md transition
