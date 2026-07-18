@@ -4,11 +4,50 @@ import { getChatResponse } from '../utils/aiService'; // Ensure this path is cor
 import { getSystemPrompt } from '../utils/portfolioData'; // Importing the new data
 import { MessageCircle, X, Send, Sparkles } from 'lucide-react';
 
+// One-tap questions to help recruiters get key info instantly
+const SUGGESTIONS = [
+  "Why should I hire Rajeev?",
+  "What's his tech stack?",
+  "Tell me about his experience",
+  "Show his top projects",
+  "How can I contact him?",
+];
+
+// Renders simple markdown (**bold** and "- " bullets) from the AI reply
+const renderInline = (text) =>
+  text.split(/(\*\*[^*]+\*\*)/g).map((part, i) =>
+    part.startsWith("**") && part.endsWith("**") ? (
+      <strong key={i}>{part.slice(2, -2)}</strong>
+    ) : (
+      <React.Fragment key={i}>{part}</React.Fragment>
+    )
+  );
+
+const MessageContent = ({ text }) => {
+  const lines = text.split("\n").filter((l) => l.trim() !== "");
+  return (
+    <div className="space-y-1">
+      {lines.map((line, i) => {
+        const trimmed = line.trim();
+        if (/^[-*]\s+/.test(trimmed)) {
+          return (
+            <div key={i} className="flex gap-1.5">
+              <span className="text-sky-500 shrink-0">•</span>
+              <span>{renderInline(trimmed.replace(/^[-*]\s+/, ""))}</span>
+            </div>
+          );
+        }
+        return <p key={i}>{renderInline(trimmed)}</p>;
+      })}
+    </div>
+  );
+};
+
 const AiChatWidget = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([
     { 
-      text: "Hi! I'm Rajeev's AI Assistant. Ask me anything!", 
+      text: "Hi! I'm Rajeev's AI assistant 👋 Ask me about his experience, skills, projects, or how to get in touch.", 
       isBot: true 
     }
   ]);
@@ -21,10 +60,10 @@ const AiChatWidget = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-  const handleSend = async () => {
-    if (!input.trim()) return;
+  const handleSend = async (overrideText) => {
+    const userMsg = (typeof overrideText === "string" ? overrideText : input).trim();
+    if (!userMsg || loading) return;
 
-    const userMsg = input;
     setInput("");
     
     // 1. Add User Message to Chat
@@ -77,10 +116,25 @@ const AiChatWidget = () => {
                     ? 'bg-white dark:bg-slate-700 text-gray-800 dark:text-gray-200 border border-gray-200 dark:border-slate-600 rounded-tl-none' 
                     : 'bg-sky-600 text-white rounded-tr-none'
                 }`}>
-                  {msg.text}
+                  {msg.isBot ? <MessageContent text={msg.text} /> : msg.text}
                 </div>
               </div>
             ))}
+
+            {/* Quick-reply chips (shown before the first user message) */}
+            {messages.length === 1 && !loading && (
+              <div className="flex flex-wrap gap-2 pt-1">
+                {SUGGESTIONS.map((s) => (
+                  <button
+                    key={s}
+                    onClick={() => handleSend(s)}
+                    className="text-xs px-3 py-1.5 rounded-full bg-sky-50 dark:bg-slate-700 text-sky-700 dark:text-sky-300 border border-sky-200 dark:border-slate-600 hover:bg-sky-100 dark:hover:bg-slate-600 transition"
+                  >
+                    {s}
+                  </button>
+                ))}
+              </div>
+            )}
             {loading && (
               <div className="flex justify-start">
                 <div className="bg-white dark:bg-slate-700 p-3 rounded-2xl rounded-tl-none border border-gray-200 dark:border-slate-600 flex gap-1 shadow-sm">
@@ -104,7 +158,7 @@ const AiChatWidget = () => {
               className="flex-1 bg-gray-100 dark:bg-slate-800 text-slate-800 dark:text-white px-4 py-2 rounded-full focus:outline-none focus:ring-2 focus:ring-sky-500 text-sm border border-transparent focus:border-sky-500 transition-all"
             />
             <button 
-              onClick={handleSend} 
+              onClick={() => handleSend()} 
               disabled={loading || !input.trim()} 
               className="p-2 bg-sky-600 text-white rounded-full hover:bg-sky-700 transition disabled:opacity-50 disabled:cursor-not-allowed shadow-md"
             >

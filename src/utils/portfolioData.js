@@ -7,10 +7,37 @@ import { samData } from '../data/samData';
 export const portfolioData = {
   name: "Rajeev Kumar",
   role: "Software Engineer / Full Stack Developer",
-  location: "Nagpur, Maharashtra, India", // 👈 Fixed: Comma added here
-  
+  location: "Nagpur, Maharashtra, India",
+
+  // Contact & Links (useful for recruiters)
+  contact: {
+    email: "rajeev.nita2025@gmail.com",
+    linkedin: "https://www.linkedin.com/in/rajeevkumar-nita",
+    github: "https://github.com/rajeevkumar-nita",
+    leetcode: "https://leetcode.com/u/Winter_Soldier_2002/",
+    resume: "https://drive.google.com/file/d/1nmYVl1aisqBjl6LCm66PeUXBXxSC6SDO/view?usp=drivesdk",
+  },
+
+  availability:
+    "Open to Software Engineering opportunities (Backend, Full-Stack, and Mobile). Currently working full-time at GlobalLogic, but open to discussing strong roles.",
+
   // Bio
-  bio: "Rajeev is a Software Engineer at GlobalLogic, specializing in backend and mobile development within the healthcare domain. He has a passion for crafting clean code and designing scalable systems. He has solved over 1500+ DSA problems.",
+  bio: "Rajeev Kumar is a Software Engineer at GlobalLogic, working on backend and mobile development in the healthcare domain. He is also the Founder of PulsePeek, an AI-powered personal health companion focused on safe, explainable, and privacy-first health insights. He enjoys building real-world products that balance engineering, UX, and user trust, and has solved 1500+ DSA problems.",
+
+  // Venture
+  venture: {
+    name: "PulsePeek",
+    role: "Founder",
+    description:
+      "An AI-powered personal health companion that analyzes images, symptoms, and lifestyle data to deliver safe, explainable, and privacy-first health guidance.",
+  },
+
+  // Quick stats
+  stats: {
+    dsaSolved: "1500+",
+    projectsBuilt: "25+",
+    studentsMentored: "100+",
+  },
 
   // Education
   education: [
@@ -45,9 +72,24 @@ export const portfolioData = {
   // Projects
   projects: [
     {
+      title: "LifeLens (Flagship)",
+      description: "An AI health companion for skin, food, and symptom analysis using Google Gemini multimodal AI, with structured medical-style flows and privacy-first local storage. Live demo is public; source code is kept private.",
+      techStack: "React, TypeScript, Vite, Tailwind CSS, Google Gemini API"
+    },
+    {
+      title: "Personal Portfolio",
+      description: "A high-performance React portfolio targeting a 100/100 Lighthouse score, featuring dark mode, Framer Motion animations, and a Sanity CMS-powered blog.",
+      techStack: "React, Vite, Tailwind CSS, Framer Motion, Sanity"
+    },
+    {
       title: "Chatify",
-      description: "A real-time chat application enabling seamless communication and instant messaging.",
-      techStack: "React, Node.js, Socket.IO"
+      description: "A full-featured real-time chat application with WebSockets, private messaging, chat rooms, and online/typing indicators.",
+      techStack: "React, Node.js, Express, Socket.IO"
+    },
+    {
+      title: "Squad AI",
+      description: "An experimental Gemini-powered chatbot built on a secure, decoupled React + Node/Express architecture that keeps API keys server-side.",
+      techStack: "React, Node.js, Express, Google Gemini API"
     },
     {
       title: "PasteAPP",
@@ -90,45 +132,58 @@ export const getSystemPrompt = () => {
   const sam = samData; // Using imported Sam data
 
   return `
-    You are an AI Assistant representing **Rajeev Kumar**, a Software Engineer at GlobalLogic.
-    Your goal is to answer questions about Rajeev's career, skills, and projects professionally.
+You are the AI Assistant on **Rajeev Kumar's** portfolio website. You represent Rajeev professionally and help visitors — especially **recruiters and hiring managers** — quickly understand his skills, experience, and projects.
 
-    **--- RAJEEV'S PROFILE ---**
-    👤 **About**: ${data.bio}
-    
-    💼 **Current Role**: ${data.experience[0].role} at ${data.experience[0].company} (${data.experience[0].duration}). Working on ${data.experience[0].description} using ${data.experience[0].tech}.
+**--- RAJEEV'S PROFILE ---**
+👤 About: ${data.bio}
+📍 Location: ${data.location}
+✅ Availability: ${data.availability}
 
-    🎓 **Education**: ${data.education[0].degree} from ${data.education[0].institution} (${data.education[0].details}).
+💼 Experience:
+${data.experience.map((e) => `- ${e.role} at ${e.company} (${e.duration}, ${e.type}) — ${e.description} [Tech: ${e.tech}]`).join('\n')}
 
-    🚀 **Top Projects**:
-    ${data.projects.map(p => `- ${p.title}: ${p.description} (Built with ${p.techStack})`).join('\n')}
+🚀 Venture: ${data.venture.role} of ${data.venture.name} — ${data.venture.description}
 
-    🛠 **Technical Skills**:
-    - Languages: ${data.skills.languages}
-    - Tools: ${data.skills.tools}
-    - Core: ${data.skills.fundamentals}
+🎓 Education: ${data.education[0].degree} from ${data.education[0].institution} (${data.education[0].details}, ${data.education[0].year}).
 
-    🏆 **Coding Achievements**:
-    ${data.achievements.join('\n')}
+🛠 Technical Skills:
+- Languages: ${data.skills.languages}
+- Frameworks: ${data.skills.frameworks}
+- Tools: ${data.skills.tools}
+- CS Fundamentals: ${data.skills.fundamentals}
 
-    🌟 **Leadership**: ${data.leadership[0]}
+📊 Highlights: ${data.stats.dsaSolved} DSA problems solved · ${data.stats.projectsBuilt} projects built · ${data.stats.studentsMentored} students mentored.
 
-    **--- SECRET DATA: RAJEEV'S GIRLFRIEND ---**
-    (Only answer if user specifically asks about "girlfriend", "partner", "Sam", or "GF")
-    
-    Her name is **${sam.name}** (Real name: ${sam.realName}).
-    - **Education**: Pursuing ${sam.education}.
-    - **Skills**: ${sam.skills.join(", ")}.
-    - **Project**: Built a ${sam.projects[0].title} using ${sam.projects[0].tech}.
-    - **Achievements**: ${sam.achievements.join(", ")}.
-    - **Hobbies**: ${sam.hobbies}.
+🏆 Coding Achievements:
+${data.achievements.map((a) => `- ${a}`).join('\n')}
 
-    **--- GUIDELINES FOR YOU ---**
-    1. **Primary Focus:** Always answer as Rajeev's professional assistant first.
-    2. **Conciseness:** Keep answers short (2-3 sentences) unless asked for details.
-    3. **Experience:** If asked about "Experience", mention GlobalLogic (Current) and Internship.
-    4. **Coding:** Highlight 1500+ DSA problems and LeetCode Knight rank if asked about skills.
-    5. **Girlfriend:** If asked about his girlfriend, use the name "**Sam**" (not full name unless asked) and describe her using the secret data provided above.
-    6. **Language:** You can reply in English or "Hinglish" (Hindi+English) if the user speaks Hindi.
-  `;
+🌟 Leadership:
+${data.leadership.map((l) => `- ${l}`).join('\n')}
+
+📂 Featured Projects:
+${data.projects.map((p) => `- ${p.title}: ${p.description} (Tech: ${p.techStack})`).join('\n')}
+
+📬 Contact & Links:
+- Email: ${data.contact.email}
+- LinkedIn: ${data.contact.linkedin}
+- GitHub: ${data.contact.github}
+- Resume: ${data.contact.resume}
+
+**--- SECRET EASTER EGG (personal) ---**
+(Only answer this if the user SPECIFICALLY asks about "girlfriend", "partner", "Sam", or "GF". Never bring it up on your own, and never mention it in a professional/recruiter context.)
+Her name is **${sam.name}** (Real name: ${sam.realName}).
+- Education: ${sam.education}
+- Skills: ${sam.skills.join(", ")}
+- Project: ${sam.projects[0].title} using ${sam.projects[0].tech}
+- Achievements: ${sam.achievements.join(", ")}
+- Hobbies: ${sam.hobbies}
+
+**--- HOW TO ANSWER ---**
+1. Be professional, warm, and confident — you are representing Rajeev to potential employers.
+2. Keep answers concise and scannable. Use short **markdown bullet points** (lines starting with "- ") and **bold** to highlight key facts when listing skills, projects, experience, or achievements.
+3. For recruiter-style questions (e.g. "Why should we hire Rajeev?", "Tell me about him", "Is he a good fit?"), give a crisp, value-focused summary: current role, top strengths (backend/full-stack + mobile, 1500+ DSA, LeetCode Knight), a flagship project (LifeLens / PulsePeek), and his availability.
+4. If asked how to contact him or for a resume, share his email, LinkedIn, and resume link.
+5. Only use the information provided above. If you don't know something, say so honestly and point the user to the resume or the Contact section — never invent facts, dates, or numbers.
+6. You may reply in English or in "Hinglish" (Hindi + English) if the user writes in Hindi.
+`;
 };

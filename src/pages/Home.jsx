@@ -157,11 +157,11 @@ const Home = () => {
               data-aos="zoom-in-up"
               aria-label={label}
             >
-              <div className="w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center rounded-full bg-white/90 hover:bg-white shadow-md hover:shadow-glow transition-transform duration-300 hover:scale-110 hover:-translate-y-1">
+              <div className="w-12 h-12 sm:w-12 sm:h-12 flex items-center justify-center rounded-full bg-white/90 hover:bg-white shadow-md hover:shadow-glow transition-transform duration-300 hover:scale-110 hover:-translate-y-1 active:scale-95">
                 {icon ? (
-                  <span className="text-xl text-gray-800">{icon}</span>
+                  <span className="text-2xl sm:text-xl text-gray-800">{icon}</span>
                 ) : (
-                  <img src={img} alt={label} className="w-6 h-6" />
+                  <img src={img} alt={label} className="w-7 h-7 sm:w-6 sm:h-6" />
                 )}
               </div>
             </a>
