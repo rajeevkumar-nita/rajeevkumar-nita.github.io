@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
-import FlipCard from "../components/FlipCard";
 import Timeline from "../components/Timeline";
 import CountUp from "react-countup";
+import { Code2, Rocket, Brain, FolderGit2, Users } from "lucide-react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
@@ -44,38 +44,93 @@ const About = () => {
   <strong className="dark:text-slate-100">React, Node.js, Spring Boot</strong>, and modern AI systems.
         </p>
 
-        {/* Flip Cards */}
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 mb-16">
-          <div data-aos="zoom-in" data-aos-delay="0">
-            <FlipCard front="🌐 Full-Stack Engineer" back="React, Node.js, TypeScript" />
-          </div>
-          <div data-aos="zoom-in" data-aos-delay="100">
-            <FlipCard front="🚀 Product Builder" back="Founder of PulsePeek (AI Health Platform)" />
-          </div>
-          <div data-aos="zoom-in" data-aos-delay="200">
-            <FlipCard front="🧠 Problem Solver" back="1500+ DSA Questions" />
-          </div>
-        </div>
-        
-        {/* Quick Stats */}
-        <div className="flex flex-wrap justify-center gap-8 text-center mb-16">
-          <div className="text-lg font-medium" data-aos="fade-up">
-            <div className="text-4xl font-extrabold text-sky-600 dark:text-sky-400">
-              <CountUp end={1500} duration={2} />+
+        {/* Bento Grid */}
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 sm:gap-5 mb-16 text-left">
+          {/* Intro / role — large tile */}
+          <div
+            className="col-span-2 group relative overflow-hidden rounded-2xl p-6 sm:p-7 bg-gradient-to-br from-sky-50 to-violet-50 dark:from-slate-800 dark:to-slate-800/60 border border-slate-200/70 dark:border-slate-700/60 shadow-card hover:shadow-glow hover:-translate-y-0.5 transition-all duration-300"
+            data-aos="fade-up"
+          >
+            <div className="flex items-center gap-3 mb-3 relative z-10">
+              <span className="p-2.5 rounded-xl bg-sky-500/10 text-sky-600 dark:text-sky-400">
+                <Code2 size={22} />
+              </span>
+              <h3 className="text-xl font-bold text-slate-800 dark:text-slate-100">
+                Full-Stack Engineer
+              </h3>
             </div>
-            <div className="text-slate-700 dark:text-slate-400">DSA Solved</div>
-          </div>
-          <div className="text-lg font-medium" data-aos="fade-up" data-aos-delay="100">
-            <div className="text-4xl font-extrabold text-green-600 dark:text-green-400">
-              <CountUp end={25} duration={2} />+
+            <p className="relative z-10 text-sm sm:text-base text-slate-600 dark:text-slate-400">
+              I build real-world products that balance{" "}
+              <strong className="text-slate-800 dark:text-slate-200">engineering, UX, and user trust</strong>{" "}
+              — working across backend, mobile, and modern AI systems.
+            </p>
+            <div className="relative z-10 mt-4 flex flex-wrap gap-2">
+              {["React", "Node.js", "Spring Boot", "TypeScript", "AI Systems"].map((t) => (
+                <span
+                  key={t}
+                  className="px-3 py-1 rounded-full text-xs font-semibold bg-white/70 dark:bg-slate-900/40 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700"
+                >
+                  {t}
+                </span>
+              ))}
             </div>
-            <div className="text-slate-700 dark:text-slate-400">Projects</div>
           </div>
-          <div className="text-lg font-medium" data-aos="fade-up" data-aos-delay="200">
-            <div className="text-4xl font-extrabold text-purple-600 dark:text-purple-400">
-              <CountUp end={100} duration={2} />+
+
+          {/* Founder tile */}
+          <div
+            className="col-span-2 md:col-span-1 group relative overflow-hidden rounded-2xl p-6 sm:p-7 bg-white dark:bg-slate-800/60 border border-slate-200/70 dark:border-slate-700/60 shadow-card hover:shadow-glow hover:-translate-y-0.5 transition-all duration-300"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
+            <span className="inline-flex p-2.5 rounded-xl bg-violet-500/10 text-violet-600 dark:text-violet-400 mb-3">
+              <Rocket size={22} />
+            </span>
+            <h3 className="text-lg font-bold text-slate-800 dark:text-slate-100 mb-1">
+              Product Builder
+            </h3>
+            <p className="text-sm text-slate-600 dark:text-slate-400">
+              Founder of{" "}
+              <strong className="text-slate-800 dark:text-slate-200">PulsePeek</strong> — an
+              AI-powered personal health companion.
+            </p>
+          </div>
+
+          {/* Stat: DSA */}
+          <div
+            className="group relative overflow-hidden rounded-2xl p-5 sm:p-6 text-center bg-white dark:bg-slate-800/60 border border-slate-200/70 dark:border-slate-700/60 shadow-card hover:shadow-glow hover:-translate-y-0.5 transition-all duration-300"
+            data-aos="zoom-in"
+          >
+            <Brain className="mx-auto mb-2 text-sky-600 dark:text-sky-400" size={24} />
+            <div className="text-3xl sm:text-4xl font-extrabold text-sky-600 dark:text-sky-400">
+              <CountUp end={1500} duration={2} enableScrollSpy scrollSpyOnce />+
             </div>
-            <div className="text-slate-700 dark:text-slate-400">Students Mentored</div>
+            <div className="text-sm text-slate-600 dark:text-slate-400 mt-1">DSA Solved</div>
+          </div>
+
+          {/* Stat: Projects */}
+          <div
+            className="group relative overflow-hidden rounded-2xl p-5 sm:p-6 text-center bg-white dark:bg-slate-800/60 border border-slate-200/70 dark:border-slate-700/60 shadow-card hover:shadow-glow hover:-translate-y-0.5 transition-all duration-300"
+            data-aos="zoom-in"
+            data-aos-delay="100"
+          >
+            <FolderGit2 className="mx-auto mb-2 text-green-600 dark:text-green-400" size={24} />
+            <div className="text-3xl sm:text-4xl font-extrabold text-green-600 dark:text-green-400">
+              <CountUp end={25} duration={2} enableScrollSpy scrollSpyOnce />+
+            </div>
+            <div className="text-sm text-slate-600 dark:text-slate-400 mt-1">Projects</div>
+          </div>
+
+          {/* Stat: Mentored */}
+          <div
+            className="col-span-2 md:col-span-1 group relative overflow-hidden rounded-2xl p-5 sm:p-6 text-center bg-white dark:bg-slate-800/60 border border-slate-200/70 dark:border-slate-700/60 shadow-card hover:shadow-glow hover:-translate-y-0.5 transition-all duration-300"
+            data-aos="zoom-in"
+            data-aos-delay="200"
+          >
+            <Users className="mx-auto mb-2 text-purple-600 dark:text-purple-400" size={24} />
+            <div className="text-3xl sm:text-4xl font-extrabold text-purple-600 dark:text-purple-400">
+              <CountUp end={100} duration={2} enableScrollSpy scrollSpyOnce />+
+            </div>
+            <div className="text-sm text-slate-600 dark:text-slate-400 mt-1">Students Mentored</div>
           </div>
         </div>
 

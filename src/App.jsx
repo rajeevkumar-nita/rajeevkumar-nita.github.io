@@ -12,6 +12,7 @@ import Header from './components/Header';
 import Home from './pages/Home';
 import Footer from './components/Footer';
 import TechMarquee from './components/TechMarquee';
+import CustomCursor from './components/CustomCursor';
 
 // Lazy Load Sections (Below the Fold) to reduce initial bundle size
 // This fixes "Reduce unused JavaScript"
@@ -70,6 +71,8 @@ const App = () => {
 
   return (
     <div className="font-sans text-gray-800">
+      {/* Custom cursor (fine-pointer devices only) */}
+      <CustomCursor />
       {/* Scroll progress bar */}
       <motion.div
         style={{ scaleX }}

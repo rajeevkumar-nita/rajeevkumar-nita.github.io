@@ -1,6 +1,7 @@
 import React from "react";
 import { FaGithub, FaArrowRight } from "react-icons/fa";
 import { useTheme } from "../context/ThemeContext";
+import MagneticButton from "../components/MagneticButton";
 
 const GITHUB_USERNAME = "rajeevkumar-nita";
 
@@ -60,7 +61,8 @@ const GitHubStats = () => {
         />
 
         {/* CTA */}
-        <a
+        <MagneticButton
+          as="a"
           href={`https://github.com/${GITHUB_USERNAME}`}
           target="_blank"
           rel="noopener noreferrer"
@@ -68,7 +70,7 @@ const GitHubStats = () => {
           data-aos="zoom-in"
         >
           <FaGithub /> Visit My GitHub <FaArrowRight className="text-sm" />
-        </a>
+        </MagneticButton>
       </div>
     </section>
   );

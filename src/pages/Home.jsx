@@ -4,6 +4,7 @@ import { Typewriter } from "react-simple-typewriter";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import SEO from "../components/SEO";
+import MagneticButton from "../components/MagneticButton";
 
 // Reusable social link config
 const socialLinks = [
@@ -125,14 +126,16 @@ const Home = () => {
 
         {/* CTA Buttons */}
         <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mt-6" data-aos="zoom-in">
-          <a
+          <MagneticButton
+            as="a"
             href="#projects"
             className="px-6 py-3 w-56 sm:w-auto rounded-xl text-lg font-semibold bg-white/10 border border-white/25 backdrop-blur-md text-white hover:bg-white/20 hover:shadow-glow hover:-translate-y-0.5 transition-all duration-300"
           >
             View My Work
-          </a>
+          </MagneticButton>
 
-          <a
+          <MagneticButton
+            as="a"
             href="mailto:rajeev.nita2025@gmail.com?subject=Let’s Work Together"
             className="px-6 py-3 w-56 sm:w-auto rounded-xl text-lg font-semibold bg-gradient-to-r from-sky-500 to-violet-500 text-white shadow-lg hover:shadow-glow hover:-translate-y-0.5 hover:scale-[1.03] transition-all duration-300"
           >
@@ -140,7 +143,7 @@ const Home = () => {
               <FaEnvelope />
               Hire Me
             </div>
-          </a>
+          </MagneticButton>
         </div>
 
         {/* Social Media Links */}
