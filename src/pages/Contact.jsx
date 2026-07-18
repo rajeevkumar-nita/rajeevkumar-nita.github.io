@@ -3,10 +3,8 @@ import { useForm, ValidationError } from '@formspree/react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { FaLinkedin, FaEnvelope } from 'react-icons/fa';
+import MagneticButton from '../components/MagneticButton';
 
-/**
- * Renders the Contact section with a Formspree-integrated form.
- */
 const Contact = () => {
   useEffect(() => {
     AOS.init({ duration: 1000, once: true });
@@ -120,14 +118,15 @@ const Contact = () => {
 
           {/* Submit Button: Added dark mode focus ring */}
           <div className="text-center">
-            <button
+            <MagneticButton
+              as="button"
               type="submit"
               disabled={state.submitting} 
               className="w-full py-3 bg-gradient-to-r from-sky-500 to-violet-500 text-white font-semibold rounded-xl hover:shadow-glow hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-sky-500 dark:focus:ring-sky-400 transition-all
                          disabled:from-slate-400 disabled:to-slate-400 disabled:cursor-not-allowed disabled:translate-y-0 disabled:shadow-none"
             >
               {state.submitting ? "Sending..." : "Send Message"}
-            </button>
+            </MagneticButton>
           </div>
         </form>
 

@@ -6,6 +6,7 @@ import {
   FaEnvelope,
 } from 'react-icons/fa';
 import { FaXTwitter } from 'react-icons/fa6';
+import MagneticButton from './MagneticButton';
 
 /**
  * Renders the site-wide footer.
@@ -28,7 +29,8 @@ const Footer = () => {
         </p>
 
         {/* Resume CTA */}
-        <a
+        <MagneticButton
+          as="a"
           href="https://drive.google.com/file/d/1nmYVl1aisqBjl6LCm66PeUXBXxSC6SDO/view?usp=drivesdk"
           target="_blank"
           rel="noopener noreferrer"
@@ -37,7 +39,7 @@ const Footer = () => {
                      font-semibold rounded-full transition-all"
         >
           View My Resume 👨‍💻
-        </a>
+        </MagneticButton>
 
         {/* Social Icons */}
         <div className="flex justify-center gap-4 text-lg mt-6">
