@@ -2,7 +2,18 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { getChatResponse } from '../utils/aiService'; // Ensure this path is correct
 import { getSystemPrompt } from '../utils/portfolioData'; // Importing the new data
-import { MessageCircle, X, Send, Sparkles } from 'lucide-react';
+import { MessageCircle, X, Send, Sparkles, Mic, Volume2, VolumeX } from 'lucide-react';
+
+// Browser Web Speech API support (no dependencies / no API cost)
+const SpeechRecognitionAPI =
+  typeof window !== 'undefined'
+    ? window.SpeechRecognition || window.webkitSpeechRecognition
+    : null;
+const TTS_SUPPORTED = typeof window !== 'undefined' && 'speechSynthesis' in window;
+
+// Strip markdown so it is read aloud cleanly
+const stripMarkdown = (text) =>
+  text.replace(/\*\*/g, '').replace(/[#`>_]/g, '').replace(/^\s*[-*]\s+/gm, '');
 
 // One-tap questions to help recruiters get key info instantly
 const SUGGESTIONS = [
@@ -53,12 +64,71 @@ const AiChatWidget = () => {
   ]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
+  const [isListening, setIsListening] = useState(false);
+  const [voiceEnabled, setVoiceEnabled] = useState(false);
   
   const messagesEndRef = useRef(null);
+  const recognitionRef = useRef(null);
+  const voiceEnabledRef = useRef(false);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
+
+  // Keep a ref in sync so async replies can check the latest voice setting
+  useEffect(() => {
+    voiceEnabledRef.current = voiceEnabled;
+  }, [voiceEnabled]);
+
+  // Stop any voice activity when the chat is closed
+  useEffect(() => {
+    if (!isOpen) {
+      if (TTS_SUPPORTED) window.speechSynthesis.cancel();
+      recognitionRef.current?.abort?.();
+      setIsListening(false);
+    }
+  }, [isOpen]);
+
+  // Read a bot reply aloud (only if voice output is enabled)
+  const speak = (text) => {
+    if (!voiceEnabledRef.current || !TTS_SUPPORTED) return;
+    window.speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(stripMarkdown(text));
+    utterance.lang = "en-US";
+    utterance.rate = 1;
+    window.speechSynthesis.speak(utterance);
+  };
+
+  // Start / stop microphone dictation
+  const toggleMic = () => {
+    if (!SpeechRecognitionAPI) return;
+    if (isListening) {
+      recognitionRef.current?.stop();
+      setIsListening(false);
+      return;
+    }
+    const recognition = new SpeechRecognitionAPI();
+    recognition.lang = "en-US";
+    recognition.interimResults = false;
+    recognition.maxAlternatives = 1;
+    recognition.onresult = (event) => {
+      const transcript = event.results[0][0].transcript;
+      handleSend(transcript); // auto-send the spoken question
+    };
+    recognition.onend = () => setIsListening(false);
+    recognition.onerror = () => setIsListening(false);
+    recognitionRef.current = recognition;
+    setIsListening(true);
+    recognition.start();
+  };
+
+  const toggleVoice = () => {
+    setVoiceEnabled((prev) => {
+      const next = !prev;
+      if (!next && TTS_SUPPORTED) window.speechSynthesis.cancel();
+      return next;
+    });
+  };
 
   const handleSend = async (overrideText) => {
     const userMsg = (typeof overrideText === "string" ? overrideText : input).trim();
@@ -79,6 +149,7 @@ const AiChatWidget = () => {
 
       // 4. Add Bot Reply to Chat
       setMessages(prev => [...prev, { text: botReply, isBot: true }]);
+      speak(botReply); // 5. Read it aloud if voice output is on
     } catch (error) {
       setMessages(prev => [...prev, { text: "Oops! I'm having trouble connecting right now.", isBot: true }]);
     } finally {
@@ -102,9 +173,21 @@ const AiChatWidget = () => {
                 <span className="text-[10px] opacity-90 block">Online | Powered by Gemini</span>
               </div>
             </div>
-            <button onClick={() => setIsOpen(false)} className="hover:bg-sky-700 p-1 rounded-full transition">
-              <X size={20} />
-            </button>
+            <div className="flex items-center gap-1">
+              {TTS_SUPPORTED && (
+                <button
+                  onClick={toggleVoice}
+                  title={voiceEnabled ? "Turn off voice replies" : "Read replies aloud"}
+                  aria-label={voiceEnabled ? "Turn off voice replies" : "Read replies aloud"}
+                  className={`p-1.5 rounded-full transition ${voiceEnabled ? 'bg-sky-700' : 'hover:bg-sky-700'}`}
+                >
+                  {voiceEnabled ? <Volume2 size={18} /> : <VolumeX size={18} />}
+                </button>
+              )}
+              <button onClick={() => setIsOpen(false)} className="hover:bg-sky-700 p-1 rounded-full transition">
+                <X size={20} />
+              </button>
+            </div>
           </div>
 
           {/* Messages Body */}
@@ -149,9 +232,23 @@ const AiChatWidget = () => {
 
           {/* Input Area */}
           <div className="p-3 bg-white dark:bg-slate-900 border-t border-gray-200 dark:border-slate-700 flex gap-2">
+            {SpeechRecognitionAPI && (
+              <button
+                onClick={toggleMic}
+                title={isListening ? "Stop listening" : "Ask by voice"}
+                aria-label={isListening ? "Stop listening" : "Ask by voice"}
+                className={`p-2 rounded-full shadow-md transition ${
+                  isListening
+                    ? 'bg-red-500 text-white animate-pulse'
+                    : 'bg-gray-100 dark:bg-slate-800 text-sky-600 dark:text-sky-400 hover:bg-gray-200 dark:hover:bg-slate-700'
+                }`}
+              >
+                <Mic size={18} />
+              </button>
+            )}
             <input 
               type="text" 
-              placeholder="Ask about my projects..." 
+              placeholder={isListening ? "Listening..." : "Ask about my projects..."} 
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && handleSend()}
