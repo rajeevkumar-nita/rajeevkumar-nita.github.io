@@ -2,7 +2,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { getChatResponse } from '../utils/aiService'; // Ensure this path is correct
 import { getSystemPrompt } from '../utils/portfolioData'; // Importing the new data
-import { MessageCircle, X, Send, Sparkles, Mic, Volume2, VolumeX } from 'lucide-react';
+import { MessageCircle, X, Send, Sparkles, Mic, MicOff, Volume2, VolumeX } from 'lucide-react';
 
 // Browser Web Speech API support (no dependencies / no API cost)
 const SpeechRecognitionAPI =
@@ -64,64 +64,137 @@ const AiChatWidget = () => {
   ]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
-  const [isListening, setIsListening] = useState(false);
   const [voiceEnabled, setVoiceEnabled] = useState(false);
-  
+  // Two-way voice conversation mode (ChatGPT-style hands-free chat)
+  const [voiceMode, setVoiceMode] = useState(false);
+  const [voiceState, setVoiceState] = useState("idle"); // idle | listening | processing | speaking
+
   const messagesEndRef = useRef(null);
   const recognitionRef = useRef(null);
+  const utteranceRef = useRef(null);
+  const restartTimerRef = useRef(null);
   const voiceEnabledRef = useRef(false);
+  const voiceModeRef = useRef(false);
+  const voiceStateRef = useRef("idle");
+  const handleSendRef = useRef(null);
+  const startListeningRef = useRef(null);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-  // Keep a ref in sync so async replies can check the latest voice setting
-  useEffect(() => {
-    voiceEnabledRef.current = voiceEnabled;
-  }, [voiceEnabled]);
+  // Keep refs in sync so async voice callbacks always read the latest values
+  useEffect(() => { voiceEnabledRef.current = voiceEnabled; }, [voiceEnabled]);
+  useEffect(() => { voiceModeRef.current = voiceMode; }, [voiceMode]);
+  useEffect(() => { voiceStateRef.current = voiceState; }, [voiceState]);
 
-  // Stop any voice activity when the chat is closed
-  useEffect(() => {
-    if (!isOpen) {
-      if (TTS_SUPPORTED) window.speechSynthesis.cancel();
-      recognitionRef.current?.abort?.();
-      setIsListening(false);
-    }
-  }, [isOpen]);
+  // --- Speech recognition (speech -> text) -----------------------------
+  const startListening = () => {
+    if (!SpeechRecognitionAPI || !voiceModeRef.current) return;
+    clearTimeout(restartTimerRef.current);
+    // Never open the mic while the assistant is talking (avoids echo capture)
+    if (TTS_SUPPORTED && window.speechSynthesis.speaking) return;
+    try { recognitionRef.current?.abort?.(); } catch { /* not started */ }
 
-  // Read a bot reply aloud (only if voice output is enabled)
-  const speak = (text) => {
-    if (!voiceEnabledRef.current || !TTS_SUPPORTED) return;
-    window.speechSynthesis.cancel();
-    const utterance = new SpeechSynthesisUtterance(stripMarkdown(text));
-    utterance.lang = "en-US";
-    utterance.rate = 1;
-    window.speechSynthesis.speak(utterance);
-  };
-
-  // Start / stop microphone dictation
-  const toggleMic = () => {
-    if (!SpeechRecognitionAPI) return;
-    if (isListening) {
-      recognitionRef.current?.stop();
-      setIsListening(false);
-      return;
-    }
     const recognition = new SpeechRecognitionAPI();
     recognition.lang = "en-US";
     recognition.interimResults = false;
     recognition.maxAlternatives = 1;
+    let resolved = false; // guards against duplicate results / stray restarts
+
     recognition.onresult = (event) => {
-      const transcript = event.results[0][0].transcript;
-      handleSend(transcript); // auto-send the spoken question
+      resolved = true;
+      const transcript = event.results[0][0].transcript?.trim();
+      if (transcript) {
+        setVoiceState("processing");
+        handleSendRef.current?.(transcript, { fromVoice: true });
+      }
     };
-    recognition.onend = () => setIsListening(false);
-    recognition.onerror = () => setIsListening(false);
+    recognition.onerror = (event) => {
+      if (event.error === "not-allowed" || event.error === "service-not-allowed") {
+        resolved = true;
+        stopVoiceMode();
+        setMessages((prev) => [
+          ...prev,
+          { text: "I need microphone access for voice chat. Please allow it in your browser and tap the mic again.", isBot: true },
+        ]);
+      }
+    };
+    recognition.onend = () => {
+      // Silence timeout with no captured speech -> keep the conversation open
+      // by restarting the mic (throttled so we never spin in a tight loop).
+      if (voiceModeRef.current && !resolved && voiceStateRef.current === "listening") {
+        restartTimerRef.current = setTimeout(() => startListeningRef.current?.(), 350);
+      }
+    };
+
     recognitionRef.current = recognition;
-    setIsListening(true);
-    recognition.start();
+    setVoiceState("listening");
+    try { recognition.start(); } catch { /* start() throws if already running */ }
+  };
+  startListeningRef.current = startListening;
+
+  // --- Speech synthesis (text -> speech) -------------------------------
+  const speak = (text) => {
+    const shouldSpeak = voiceModeRef.current || voiceEnabledRef.current;
+    if (!TTS_SUPPORTED || !shouldSpeak) {
+      if (voiceModeRef.current) startListening(); // no TTS -> just keep listening
+      return;
+    }
+    window.speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(stripMarkdown(text));
+    utterance.lang = "en-US";
+    utterance.rate = 1;
+    utteranceRef.current = utterance;
+    if (voiceModeRef.current) setVoiceState("speaking");
+
+    const done = () => {
+      if (utteranceRef.current === utterance) utteranceRef.current = null;
+      if (voiceModeRef.current) startListening(); // resume the conversation
+      else setVoiceState("idle");
+    };
+    utterance.onend = done;
+    utterance.onerror = done;
+    window.speechSynthesis.speak(utterance);
   };
 
+  // Barge-in: stop the assistant mid-sentence and listen to the user again
+  const interruptSpeaking = () => {
+    if (utteranceRef.current) utteranceRef.current.onend = null;
+    utteranceRef.current = null;
+    if (TTS_SUPPORTED) window.speechSynthesis.cancel();
+    clearTimeout(restartTimerRef.current);
+    // small delay lets speechSynthesis fully release before re-opening the mic
+    restartTimerRef.current = setTimeout(() => startListeningRef.current?.(), 150);
+  };
+
+  // --- Voice mode lifecycle -------------------------------------------
+  const stopVoiceMode = () => {
+    voiceModeRef.current = false;
+    setVoiceMode(false);
+    setVoiceState("idle");
+    clearTimeout(restartTimerRef.current);
+    if (utteranceRef.current) utteranceRef.current.onend = null;
+    utteranceRef.current = null;
+    try { recognitionRef.current?.abort?.(); } catch { /* noop */ }
+    recognitionRef.current = null;
+    if (TTS_SUPPORTED) window.speechSynthesis.cancel();
+  };
+
+  const startVoiceMode = () => {
+    if (!SpeechRecognitionAPI) return;
+    voiceModeRef.current = true;
+    setVoiceMode(true);
+    setVoiceEnabled(true); // spoken replies are inherent to voice mode
+    startListening();
+  };
+
+  const toggleVoiceMode = () => {
+    if (voiceModeRef.current) stopVoiceMode();
+    else startVoiceMode();
+  };
+
+  // Header speaker toggle: read-aloud for the text chat (independent of voice mode)
   const toggleVoice = () => {
     setVoiceEnabled((prev) => {
       const next = !prev;
@@ -130,32 +203,45 @@ const AiChatWidget = () => {
     });
   };
 
-  const handleSend = async (overrideText) => {
+  const handleSend = async (overrideText, opts = {}) => {
     const userMsg = (typeof overrideText === "string" ? overrideText : input).trim();
     if (!userMsg || loading) return;
 
     setInput("");
-    
-    // 1. Add User Message to Chat
-    setMessages(prev => [...prev, { text: userMsg, isBot: false }]);
+    setMessages((prev) => [...prev, { text: userMsg, isBot: false }]);
     setLoading(true);
+    if (opts.fromVoice || voiceModeRef.current) setVoiceState("processing");
 
     try {
-      // 2. Get the System Prompt (The Data)
-      const systemPrompt = getSystemPrompt(); 
-      
-      // 3. Send to Gemini AI
+      const systemPrompt = getSystemPrompt();
       const botReply = await getChatResponse(messages, userMsg, systemPrompt);
-
-      // 4. Add Bot Reply to Chat
-      setMessages(prev => [...prev, { text: botReply, isBot: true }]);
-      speak(botReply); // 5. Read it aloud if voice output is on
+      setMessages((prev) => [...prev, { text: botReply, isBot: true }]);
+      speak(botReply); // shows as text + speaks aloud + resumes listening in voice mode
     } catch (error) {
-      setMessages(prev => [...prev, { text: "Oops! I'm having trouble connecting right now.", isBot: true }]);
+      const errText = "Oops! I'm having trouble connecting right now.";
+      setMessages((prev) => [...prev, { text: errText, isBot: true }]);
+      if (voiceModeRef.current) speak(errText); // still resumes listening afterwards
     } finally {
       setLoading(false);
     }
   };
+  handleSendRef.current = handleSend;
+
+  // Stop every voice resource when the window closes
+  useEffect(() => {
+    if (!isOpen) stopVoiceMode();
+  }, [isOpen]);
+
+  // Full cleanup on unmount (recognition, synthesis, timers)
+  useEffect(() => {
+    return () => {
+      voiceModeRef.current = false;
+      clearTimeout(restartTimerRef.current);
+      if (utteranceRef.current) utteranceRef.current.onend = null;
+      try { recognitionRef.current?.abort?.(); } catch { /* noop */ }
+      if (TTS_SUPPORTED) window.speechSynthesis.cancel();
+    };
+  }, []);
 
   return (
     <div className="fixed bottom-24 right-6 md:bottom-6 z-50 font-sans">
@@ -218,6 +304,13 @@ const AiChatWidget = () => {
                 ))}
               </div>
             )}
+
+            {/* Voice hint (first open only) */}
+            {messages.length === 1 && !loading && SpeechRecognitionAPI && (
+              <p className="text-[11px] text-gray-400 dark:text-slate-500 text-center pt-1">
+                🎤 Tip: tap the mic for a hands-free voice conversation
+              </p>
+            )}
             {loading && (
               <div className="flex justify-start">
                 <div className="bg-white dark:bg-slate-700 p-3 rounded-2xl rounded-tl-none border border-gray-200 dark:border-slate-600 flex gap-1 shadow-sm">
@@ -231,36 +324,87 @@ const AiChatWidget = () => {
           </div>
 
           {/* Input Area */}
-          <div className="p-3 bg-white dark:bg-slate-900 border-t border-gray-200 dark:border-slate-700 flex gap-2">
-            {SpeechRecognitionAPI && (
-              <button
-                onClick={toggleMic}
-                title={isListening ? "Stop listening" : "Ask by voice"}
-                aria-label={isListening ? "Stop listening" : "Ask by voice"}
-                className={`p-2 rounded-full shadow-md transition ${
-                  isListening
-                    ? 'bg-red-500 text-white animate-pulse'
-                    : 'bg-gray-100 dark:bg-slate-800 text-sky-600 dark:text-sky-400 hover:bg-gray-200 dark:hover:bg-slate-700'
-                }`}
-              >
-                <Mic size={18} />
-              </button>
+          <div className="p-3 bg-white dark:bg-slate-900 border-t border-gray-200 dark:border-slate-700 flex flex-col gap-2">
+
+            {/* Voice conversation status banner */}
+            {voiceMode && (
+              <div className="flex items-center justify-between gap-2 px-3 py-2 rounded-xl bg-sky-50 dark:bg-slate-800 border border-sky-200 dark:border-slate-700">
+                <div className="flex items-center gap-2 text-sm font-medium">
+                  {voiceState === "listening" && (
+                    <>
+                      <span className="relative flex h-2.5 w-2.5">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                        <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-red-500"></span>
+                      </span>
+                      <span className="text-red-600 dark:text-red-400">Listening…</span>
+                    </>
+                  )}
+                  {voiceState === "processing" && (
+                    <>
+                      <span className="flex gap-0.5">
+                        <span className="w-1.5 h-1.5 bg-sky-500 rounded-full animate-bounce"></span>
+                        <span className="w-1.5 h-1.5 bg-sky-500 rounded-full animate-bounce delay-75"></span>
+                        <span className="w-1.5 h-1.5 bg-sky-500 rounded-full animate-bounce delay-150"></span>
+                      </span>
+                      <span className="text-sky-600 dark:text-sky-400">Thinking…</span>
+                    </>
+                  )}
+                  {voiceState === "speaking" && (
+                    <>
+                      <Volume2 size={16} className="text-emerald-500 animate-pulse" />
+                      <span className="text-emerald-600 dark:text-emerald-400">Speaking…</span>
+                    </>
+                  )}
+                </div>
+                {voiceState === "speaking" ? (
+                  <button
+                    onClick={interruptSpeaking}
+                    className="text-xs px-2.5 py-1 rounded-full bg-white dark:bg-slate-700 text-sky-700 dark:text-sky-300 border border-sky-200 dark:border-slate-600 hover:bg-sky-100 dark:hover:bg-slate-600 transition"
+                  >
+                    Interrupt
+                  </button>
+                ) : (
+                  <button
+                    onClick={stopVoiceMode}
+                    className="text-xs px-2.5 py-1 rounded-full bg-white dark:bg-slate-700 text-red-600 dark:text-red-400 border border-red-200 dark:border-slate-600 hover:bg-red-50 dark:hover:bg-slate-600 transition"
+                  >
+                    End voice
+                  </button>
+                )}
+              </div>
             )}
-            <input 
-              type="text" 
-              placeholder={isListening ? "Listening..." : "Ask about my projects..."} 
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              onKeyDown={(e) => e.key === 'Enter' && handleSend()}
-              className="flex-1 bg-gray-100 dark:bg-slate-800 text-slate-800 dark:text-white px-4 py-2 rounded-full focus:outline-none focus:ring-2 focus:ring-sky-500 text-sm border border-transparent focus:border-sky-500 transition-all"
-            />
-            <button 
-              onClick={() => handleSend()} 
-              disabled={loading || !input.trim()} 
-              className="p-2 bg-sky-600 text-white rounded-full hover:bg-sky-700 transition disabled:opacity-50 disabled:cursor-not-allowed shadow-md"
-            >
-              <Send size={18} />
-            </button>
+
+            <div className="flex gap-2">
+              {SpeechRecognitionAPI && (
+                <button
+                  onClick={toggleVoiceMode}
+                  title={voiceMode ? "Exit voice conversation" : "Start voice conversation"}
+                  aria-label={voiceMode ? "Exit voice conversation" : "Start voice conversation"}
+                  className={`p-2 rounded-full shadow-md transition ${
+                    voiceMode
+                      ? 'bg-red-500 text-white animate-pulse'
+                      : 'bg-gray-100 dark:bg-slate-800 text-sky-600 dark:text-sky-400 hover:bg-gray-200 dark:hover:bg-slate-700'
+                  }`}
+                >
+                  {voiceMode ? <MicOff size={18} /> : <Mic size={18} />}
+                </button>
+              )}
+              <input
+                type="text"
+                placeholder={voiceMode ? "Voice mode active…" : "Ask about my projects..."}
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                onKeyDown={(e) => e.key === 'Enter' && handleSend()}
+                className="flex-1 bg-gray-100 dark:bg-slate-800 text-slate-800 dark:text-white px-4 py-2 rounded-full focus:outline-none focus:ring-2 focus:ring-sky-500 text-sm border border-transparent focus:border-sky-500 transition-all"
+              />
+              <button
+                onClick={() => handleSend()}
+                disabled={loading || !input.trim()}
+                className="p-2 bg-sky-600 text-white rounded-full hover:bg-sky-700 transition disabled:opacity-50 disabled:cursor-not-allowed shadow-md"
+              >
+                <Send size={18} />
+              </button>
+            </div>
           </div>
         </div>
       )}
