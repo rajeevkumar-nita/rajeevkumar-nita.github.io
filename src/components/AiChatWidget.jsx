@@ -15,6 +15,16 @@ const TTS_SUPPORTED = typeof window !== 'undefined' && 'speechSynthesis' in wind
 const stripMarkdown = (text) =>
   text.replace(/\*\*/g, '').replace(/[#`>_]/g, '').replace(/^\s*[-*]\s+/gm, '');
 
+// Normalize text for a lightweight echo check (drop AI voice heard by the mic)
+const normalizeText = (s) =>
+  s.toLowerCase().replace(/[^a-z0-9\s]/g, '').replace(/\s+/g, ' ').trim();
+
+// Barge-in tuning: mic loudness (RMS) + consecutive frames required to confirm
+// the user is talking over the assistant. echoCancellation removes the AI audio,
+// so the analyser mostly hears the real speaker.
+const BARGE_IN_RMS = 0.045;
+const BARGE_IN_FRAMES = 5;
+
 // One-tap questions to help recruiters get key info instantly
 const SUGGESTIONS = [
   "Why should I hire Rajeev?",
@@ -78,6 +88,12 @@ const AiChatWidget = () => {
   const voiceStateRef = useRef("idle");
   const handleSendRef = useRef(null);
   const startListeningRef = useRef(null);
+  // Barge-in / echo-cancellation audio pipeline
+  const mediaStreamRef = useRef(null);
+  const audioContextRef = useRef(null);
+  const analyserRef = useRef(null);
+  const vadRafRef = useRef(null);
+  const lastSpokenRef = useRef("");
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -105,10 +121,16 @@ const AiChatWidget = () => {
     recognition.onresult = (event) => {
       resolved = true;
       const transcript = event.results[0][0].transcript?.trim();
-      if (transcript) {
-        setVoiceState("processing");
-        handleSendRef.current?.(transcript, { fromVoice: true });
+      if (!transcript) return;
+      // Safety net: ignore text that is really the AI's own voice echoed back
+      const spoken = normalizeText(lastSpokenRef.current);
+      const heard = normalizeText(transcript);
+      if (heard && spoken && heard.split(" ").length >= 3 && spoken.includes(heard)) {
+        if (voiceModeRef.current) startListeningRef.current?.();
+        return;
       }
+      setVoiceState("processing");
+      handleSendRef.current?.(transcript, { fromVoice: true });
     };
     recognition.onerror = (event) => {
       if (event.error === "not-allowed" || event.error === "service-not-allowed") {
@@ -142,6 +164,7 @@ const AiChatWidget = () => {
       return;
     }
     window.speechSynthesis.cancel();
+    lastSpokenRef.current = stripMarkdown(text); // remember it to filter echo
     const utterance = new SpeechSynthesisUtterance(stripMarkdown(text));
     utterance.lang = "en-US";
     utterance.rate = 1;
@@ -168,6 +191,63 @@ const AiChatWidget = () => {
     restartTimerRef.current = setTimeout(() => startListeningRef.current?.(), 150);
   };
 
+  // --- Hands-free barge-in detection ----------------------------------
+  // While the assistant speaks, watch the echo-cancelled mic input. A sustained
+  // loudness spike means the user started talking -> interrupt automatically.
+  const setupVad = (stream) => {
+    const AudioCtx = window.AudioContext || window.webkitAudioContext;
+    if (!AudioCtx) return;
+    try {
+      const ctx = new AudioCtx();
+      audioContextRef.current = ctx;
+      ctx.resume?.();
+      const source = ctx.createMediaStreamSource(stream);
+      const analyser = ctx.createAnalyser();
+      analyser.fftSize = 512;
+      source.connect(analyser);
+      analyserRef.current = analyser;
+      const buffer = new Uint8Array(analyser.fftSize);
+      let loudFrames = 0;
+
+      const tick = () => {
+        if (!analyserRef.current) return; // torn down
+        if (voiceStateRef.current === "speaking") {
+          analyser.getByteTimeDomainData(buffer);
+          let sum = 0;
+          for (let i = 0; i < buffer.length; i++) {
+            const v = (buffer[i] - 128) / 128;
+            sum += v * v;
+          }
+          const rms = Math.sqrt(sum / buffer.length);
+          if (rms > BARGE_IN_RMS) {
+            loudFrames += 1;
+            if (loudFrames >= BARGE_IN_FRAMES) {
+              loudFrames = 0;
+              interruptSpeaking(); // user talked over the AI -> hand them the mic
+            }
+          } else {
+            loudFrames = 0;
+          }
+        } else {
+          loudFrames = 0;
+        }
+        vadRafRef.current = requestAnimationFrame(tick);
+      };
+      vadRafRef.current = requestAnimationFrame(tick);
+    } catch { /* barge-in is optional; voice mode still works via the button */ }
+  };
+
+  const teardownAudio = () => {
+    if (vadRafRef.current) cancelAnimationFrame(vadRafRef.current);
+    vadRafRef.current = null;
+    try { analyserRef.current?.disconnect?.(); } catch { /* noop */ }
+    analyserRef.current = null;
+    try { audioContextRef.current?.close?.(); } catch { /* noop */ }
+    audioContextRef.current = null;
+    mediaStreamRef.current?.getTracks?.().forEach((t) => t.stop());
+    mediaStreamRef.current = null;
+  };
+
   // --- Voice mode lifecycle -------------------------------------------
   const stopVoiceMode = () => {
     voiceModeRef.current = false;
@@ -179,10 +259,29 @@ const AiChatWidget = () => {
     try { recognitionRef.current?.abort?.(); } catch { /* noop */ }
     recognitionRef.current = null;
     if (TTS_SUPPORTED) window.speechSynthesis.cancel();
+    teardownAudio();
+    lastSpokenRef.current = "";
   };
 
-  const startVoiceMode = () => {
+  const startVoiceMode = async () => {
     if (!SpeechRecognitionAPI) return;
+    // Request the mic up-front: triggers the permission prompt and gives us an
+    // echo-cancelled stream we can watch for hands-free interruption.
+    try {
+      if (navigator.mediaDevices?.getUserMedia) {
+        const stream = await navigator.mediaDevices.getUserMedia({
+          audio: { echoCancellation: true, noiseSuppression: true, autoGainControl: true },
+        });
+        mediaStreamRef.current = stream;
+        setupVad(stream);
+      }
+    } catch {
+      setMessages((prev) => [
+        ...prev,
+        { text: "I couldn't access your microphone. Please allow mic permission to chat by voice — you can still type your questions anytime.", isBot: true },
+      ]);
+      return; // stay in text mode
+    }
     voiceModeRef.current = true;
     setVoiceMode(true);
     setVoiceEnabled(true); // spoken replies are inherent to voice mode
@@ -240,6 +339,7 @@ const AiChatWidget = () => {
       if (utteranceRef.current) utteranceRef.current.onend = null;
       try { recognitionRef.current?.abort?.(); } catch { /* noop */ }
       if (TTS_SUPPORTED) window.speechSynthesis.cancel();
+      teardownAudio();
     };
   }, []);
 
