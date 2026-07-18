@@ -147,7 +147,7 @@ const Home = () => {
         </div>
 
         {/* Social Media Links */}
-        <div className="mt-10 flex flex-wrap justify-center gap-3 sm:gap-5 px-2 max-w-md sm:max-w-none mx-auto">
+        <div className="mt-10 flex flex-nowrap justify-center items-center gap-2 sm:gap-5 px-2">
           {socialLinks.map(({ href, icon, img, label }, idx) => (
             <a
               key={idx}
@@ -157,11 +157,11 @@ const Home = () => {
               data-aos="zoom-in-up"
               aria-label={label}
             >
-              <div className="w-12 h-12 sm:w-12 sm:h-12 flex items-center justify-center rounded-full bg-white/90 hover:bg-white shadow-md hover:shadow-glow transition-transform duration-300 hover:scale-110 hover:-translate-y-1 active:scale-95">
+              <div className="w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center rounded-full bg-white/90 hover:bg-white shadow-md hover:shadow-glow transition-transform duration-300 hover:scale-110 hover:-translate-y-1 active:scale-95">
                 {icon ? (
-                  <span className="text-2xl sm:text-xl text-gray-800">{icon}</span>
+                  <span className="text-lg sm:text-xl text-gray-800">{icon}</span>
                 ) : (
-                  <img src={img} alt={label} className="w-7 h-7 sm:w-6 sm:h-6" />
+                  <img src={img} alt={label} className="w-5 h-5 sm:w-6 sm:h-6" />
                 )}
               </div>
             </a>
