@@ -48,18 +48,18 @@ const Experience = () => {
     >
       <div className="max-w-4xl mx-auto px-4 text-center relative z-10">
         {/* Section Title */}
-        <h2
-          className="text-4xl font-bold text-sky-700 dark:text-sky-400 mb-16"
-          data-aos="fade-up"
-        >
-          Experience
-        </h2>
+        <div className="mb-16" data-aos="fade-up">
+          <span className="section-eyebrow">Career Journey</span>
+          <h2 className="text-4xl font-bold text-gradient-heading">
+            Experience
+          </h2>
+        </div>
 
         {/* Vertical Timeline Container */}
         <div className="relative max-w-3xl mx-auto">
           
           {/* The Vertical Line: Styled for both light and dark modes */}
-          <div className="absolute left-3 sm:left-6 top-1 w-1 bg-sky-200 dark:bg-slate-700 h-full z-0"></div>
+          <div className="absolute left-3 sm:left-6 top-1 w-1 bg-gradient-to-b from-sky-400 to-violet-500 dark:from-sky-500 dark:to-violet-600 h-full z-0 rounded-full"></div>
 
           {/* Map over each experience object */}
           {experiences.map((exp, index) => (
@@ -70,12 +70,15 @@ const Experience = () => {
               data-aos-delay={exp.aosDelay}
             >
               {/* Timeline Dot: Styled for light and dark modes */}
-              <div className="absolute left-3 sm:left-6 top-2 w-6 h-6 bg-white dark:bg-slate-900 border-4 border-sky-500 dark:border-sky-400 rounded-full z-10 transform -translate-x-1/2"></div>
+              <div className="absolute left-3 sm:left-6 top-2 w-6 h-6 bg-white dark:bg-slate-900 border-4 border-sky-500 dark:border-sky-400 rounded-full z-10 transform -translate-x-1/2 shadow-glow"></div>
 
               {/* Experience Card */}
-              <div className="relative bg-white/90 dark:bg-slate-800/90 backdrop-blur-sm border border-sky-100 dark:border-slate-700 rounded-xl shadow-lg p-6 text-left
-                              transition-all duration-300 hover:shadow-xl dark:hover:border-sky-600 hover:scale-[1.02]">
-                
+              <div className="group relative overflow-hidden bg-white/90 dark:bg-slate-800/90 backdrop-blur-sm border border-sky-100 dark:border-slate-700 rounded-2xl shadow-card p-6 text-left
+                              transition-all duration-300 hover:shadow-glow dark:hover:border-sky-600 hover:scale-[1.02]">
+
+                {/* Hover glow accent */}
+                <div className="pointer-events-none absolute -inset-px rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-sky-500/10 via-transparent to-violet-500/10" />
+
                 {/* Card Arrow: Points to the timeline dot */}
                 <div className="absolute -left-4 sm:-left-5 top-5 w-0 h-0 
                                   border-t-[10px] border-t-transparent
@@ -87,17 +90,17 @@ const Experience = () => {
                 {/* --- Card Content --- */}
                 
                 {/* Job Title */}
-                <h3 className="text-xl font-bold text-slate-800 dark:text-slate-100">
+                <h3 className="relative z-10 text-xl font-bold text-slate-800 dark:text-slate-100">
                   {exp.title}
                 </h3>
                 
                 {/* Company Name */}
-                <p className="text-sky-700 dark:text-sky-400 font-medium mt-1 flex items-center gap-2">
+                <p className="relative z-10 text-sky-700 dark:text-sky-400 font-medium mt-1 flex items-center gap-2">
                   <FaBuilding /> {exp.company}
                 </p>
                 
                 {/* Date/Location (Responsive) */}
-                <div className="mt-3 flex flex-col sm:flex-row justify-start items-start sm:items-center gap-1 sm:gap-4 text-slate-600 dark:text-slate-400 text-sm">
+                <div className="relative z-10 mt-3 flex flex-col sm:flex-row justify-start items-start sm:items-center gap-1 sm:gap-4 text-slate-600 dark:text-slate-400 text-sm">
                   <span className="flex items-center gap-2">
                     <FaCalendarAlt className="flex-shrink-0" /> {exp.duration}
                   </span>
@@ -107,12 +110,12 @@ const Experience = () => {
                 </div>
 
                 {/* Job Description */}
-                <p className="mt-4 text-slate-700 dark:text-slate-400 leading-relaxed">
+                <p className="relative z-10 mt-4 text-slate-700 dark:text-slate-400 leading-relaxed">
                   {exp.description}
                 </p>
 
                 {/* Skill Tags (Responsive) */}
-                <div className="mt-4 flex flex-wrap justify-start gap-2">
+                <div className="relative z-10 mt-4 flex flex-wrap justify-start gap-2">
                   {exp.skills.map((skill, i) => (
                     <span
                       key={i}

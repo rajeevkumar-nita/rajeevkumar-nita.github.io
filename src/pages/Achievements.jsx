@@ -105,7 +105,7 @@ const Achievements = () => {
       className="py-20 bg-gradient-to-b from-[#eef2ff] to-[#e0f2fe] dark:from-slate-900 dark:to-slate-900 text-slate-800 dark:text-slate-300 scroll-mt-32"
     >
       {/* Section Title: Added dark mode text color */}
-      <h2 className="text-4xl text-center font-bold text-sky-700 dark:text-sky-400 mb-12" data-aos="fade-up">
+      <h2 className="text-4xl text-center font-bold text-gradient-heading mb-12" data-aos="fade-up">
         Achievements
       </h2>
 

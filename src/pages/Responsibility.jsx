@@ -133,7 +133,7 @@ const Responsibility = () => {
     >
       {/* Section Title: Added dark mode text color */}
       <h2
-        className="text-4xl text-center font-bold text-sky-700 dark:text-sky-400 mb-12"
+        className="text-4xl text-center font-bold text-gradient-heading mb-12"
         data-aos="fade-up"
       >
         Positions of Responsibility

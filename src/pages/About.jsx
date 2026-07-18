@@ -19,7 +19,7 @@ const About = () => {
 
         {/* Title & Intro */}
         <h2 
-          className="text-4xl font-bold text-sky-600 dark:text-sky-400 mb-4" 
+          className="text-4xl font-bold text-gradient-heading mb-4" 
           data-aos="fade-up"
         >
           About Me

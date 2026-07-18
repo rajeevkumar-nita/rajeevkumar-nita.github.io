@@ -101,12 +101,12 @@ const Skills = () => {
       className="py-20 bg-gradient-to-b from-[#eef2ff] to-[#e0f2fe] dark:from-slate-900 dark:to-slate-900 text-slate-800 dark:text-slate-300 scroll-mt-32"
     >
       {/* Section Title: Added dark mode text color */}
-      <h2 
-        className="text-4xl text-center font-bold text-sky-700 dark:text-sky-400 mb-10" 
-        data-aos="fade-up"
-      >
-        My Skills
-      </h2>
+      <div className="text-center mb-10" data-aos="fade-up">
+        <span className="section-eyebrow">What I Work With</span>
+        <h2 className="text-4xl font-bold text-gradient-heading">
+          My Skills
+        </h2>
+      </div>
 
       {/* Search Bar: Added dark mode background, text, border, and focus ring */}
       <div className="flex justify-center mb-10">
@@ -115,7 +115,7 @@ const Skills = () => {
           placeholder="Search skills..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          className="px-4 py-2 rounded-lg w-full max-w-md text-slate-800 dark:text-slate-200 dark:bg-slate-700 border border-slate-300 dark:border-slate-600 focus:outline-none focus:ring-2 focus:ring-sky-500 dark:focus:ring-sky-400 shadow-md"
+          className="px-4 py-2 rounded-xl w-full max-w-md text-slate-800 dark:text-slate-200 dark:bg-slate-700 border border-slate-300 dark:border-slate-600 focus:outline-none focus:ring-2 focus:ring-sky-500 dark:focus:ring-sky-400 shadow-md"
         />
       </div>
 
@@ -131,17 +131,21 @@ const Skills = () => {
             // Accordion Item: Added dark mode background and border
             <div 
               key={idx} 
-              className="bg-white dark:bg-slate-800 rounded-lg shadow-lg overflow-hidden border border-sky-100 dark:border-slate-700"
+              className="bg-white dark:bg-slate-800 rounded-2xl shadow-card overflow-hidden border border-sky-100 dark:border-slate-700"
             >
               
               {/* Accordion Button: Added dark mode hover color */}
               <button
                 onClick={() => handleToggleCategory(category)}
-                className="w-full flex justify-between items-center text-left px-6 py-4 font-semibold text-xl text-white bg-sky-600 hover:bg-sky-700 dark:bg-sky-700 dark:hover:bg-sky-600 transition"
+                className="w-full flex justify-between items-center text-left px-6 py-4 font-semibold text-xl text-white bg-gradient-to-r from-sky-600 to-violet-600 hover:from-sky-700 hover:to-violet-700 transition"
               >
                 <span>{category}</span>
-                <span className="text-2xl">
-                  {isExpanded ? "-" : "+"}
+                <span
+                  className={`text-2xl transition-transform duration-300 ${
+                    isExpanded ? "rotate-45" : "rotate-0"
+                  }`}
+                >
+                  +
                 </span>
               </button>
 

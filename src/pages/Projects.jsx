@@ -30,7 +30,7 @@ const Projects = () => {
     >
       <div className="max-w-6xl mx-auto px-4 text-center">
         <h2
-          className="text-4xl font-bold text-sky-700 dark:text-sky-400 mb-8"
+          className="text-4xl font-bold text-gradient-heading mb-8"
           data-aos="fade-up"
         >
           My Projects

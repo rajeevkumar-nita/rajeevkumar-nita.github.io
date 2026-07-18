@@ -25,9 +25,9 @@ const Contact = () => {
       >
         <div className="container mx-auto px-4 text-center max-w-2xl">
           {/* Success Card: Added dark mode background and border */}
-          <div className="bg-white dark:bg-slate-800 dark:border dark:border-slate-700 p-8 rounded-lg shadow-md">
+          <div className="bg-white dark:bg-slate-800 dark:border dark:border-slate-700 p-8 rounded-2xl shadow-card">
             {/* Success Title: Added dark mode text */}
-            <h3 className="text-3xl font-bold text-sky-700 dark:text-sky-400 mb-4">Thanks for your message!</h3>
+            <h3 className="text-3xl font-bold text-gradient-heading mb-4">Thanks for your message!</h3>
             {/* Success Text: Added dark mode text */}
             <p className="text-lg text-slate-600 dark:text-slate-400">I'll get back to you soon.</p>
           </div>
@@ -45,17 +45,17 @@ const Contact = () => {
     >
       <div className="container mx-auto px-4">
         {/* Section Title: Added dark mode text */}
-        <h2
-          className="text-4xl text-center font-bold text-sky-700 dark:text-sky-400 mb-10"
-          data-aos="fade-up"
-        >
-          Contact Me
-        </h2>
+        <div className="text-center mb-10" data-aos="fade-up">
+          <span className="section-eyebrow">Get In Touch</span>
+          <h2 className="text-4xl font-bold text-gradient-heading">
+            Contact Me
+          </h2>
+        </div>
 
         {/* Contact Form: Added dark mode background and border */}
         <form
           onSubmit={handleSubmit}
-          className="max-w-2xl mx-auto bg-white dark:bg-slate-800 p-8 rounded-lg shadow-md dark:border dark:border-slate-700 hover:scale-[1.02] transition-transform duration-300"
+          className="max-w-2xl mx-auto bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-card dark:border dark:border-slate-700 hover:shadow-glow transition-all duration-300"
           data-aos="fade-up"
         >
           {/* Formspree global errors */}
@@ -70,7 +70,7 @@ const Contact = () => {
               type="text"
               name="name" 
               // Input Field: Added dark mode background, border, text, and focus ring
-              className="w-full p-4 border border-slate-300 dark:border-slate-600 dark:bg-slate-700 dark:text-slate-200 rounded-md focus:outline-none focus:ring-2 focus:ring-sky-500 dark:focus:ring-sky-400 text-slate-800"
+              className="w-full p-4 border border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-700/50 dark:text-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-sky-500 dark:focus:ring-sky-400 text-slate-800"
               placeholder="Your Name"
               required
             />
@@ -88,7 +88,7 @@ const Contact = () => {
               type="email"
               name="email" 
               // Input Field: Added dark mode background, border, text, and focus ring
-              className="w-full p-4 border border-slate-300 dark:border-slate-600 dark:bg-slate-700 dark:text-slate-200 rounded-md focus:outline-none focus:ring-2 focus:ring-sky-500 dark:focus:ring-sky-400 text-slate-800"
+              className="w-full p-4 border border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-700/50 dark:text-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-sky-500 dark:focus:ring-sky-400 text-slate-800"
               placeholder="Your Email"
               required
             />
@@ -105,7 +105,7 @@ const Contact = () => {
             <textarea
               name="message" 
               // Textarea: Added dark mode background, border, text, and focus ring
-              className="w-full p-4 border border-slate-300 dark:border-slate-600 dark:bg-slate-700 dark:text-slate-200 rounded-md focus:outline-none focus:ring-2 focus:ring-sky-500 dark:focus:ring-sky-400 text-slate-800"
+              className="w-full p-4 border border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-700/50 dark:text-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-sky-500 dark:focus:ring-sky-400 text-slate-800"
               placeholder="Your Message"
               rows="6"
               required
@@ -123,8 +123,8 @@ const Contact = () => {
             <button
               type="submit"
               disabled={state.submitting} 
-              className="w-full py-3 bg-sky-600 text-white font-semibold rounded-md hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-sky-500 dark:focus:ring-sky-400 transition-all
-                         disabled:bg-slate-400 disabled:cursor-not-allowed"
+              className="w-full py-3 bg-gradient-to-r from-sky-500 to-violet-500 text-white font-semibold rounded-xl hover:shadow-glow hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-sky-500 dark:focus:ring-sky-400 transition-all
+                         disabled:from-slate-400 disabled:to-slate-400 disabled:cursor-not-allowed disabled:translate-y-0 disabled:shadow-none"
             >
               {state.submitting ? "Sending..." : "Send Message"}
             </button>
@@ -141,7 +141,7 @@ const Contact = () => {
             href="https://www.linkedin.com/in/rajeevkumar-nita"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 bg-white dark:bg-slate-800 text-sky-700 dark:text-sky-400 dark:border dark:border-slate-700 px-5 py-3 rounded-full shadow-md hover:shadow-lg hover:bg-sky-100 dark:hover:bg-slate-700 transition font-medium whitespace-nowrap"
+            className="flex items-center gap-2 bg-white dark:bg-slate-800 text-sky-700 dark:text-sky-400 dark:border dark:border-slate-700 px-5 py-3 rounded-full shadow-md hover:shadow-glow hover:-translate-y-1 hover:bg-sky-100 dark:hover:bg-slate-700 transition-all font-medium whitespace-nowrap"
           >
             <FaLinkedin className="text-lg" />
             LinkedIn
@@ -150,7 +150,7 @@ const Contact = () => {
           {/* Email Button: Added dark mode background, text, border, and hover */}
           <a
             href="mailto:rajeev.nita2025@gmail.com"
-            className="flex items-center gap-2 bg-white dark:bg-slate-800 text-sky-700 dark:text-sky-400 dark:border dark:border-slate-700 px-5 py-3 rounded-full shadow-md hover:shadow-lg hover:bg-sky-100 dark:hover:bg-slate-700 transition font-medium whitespace-nowrap"
+            className="flex items-center gap-2 bg-white dark:bg-slate-800 text-sky-700 dark:text-sky-400 dark:border dark:border-slate-700 px-5 py-3 rounded-full shadow-md hover:shadow-glow hover:-translate-y-1 hover:bg-sky-100 dark:hover:bg-slate-700 transition-all font-medium whitespace-nowrap"
           >
             <FaEnvelope className="text-lg" />
             Email Me

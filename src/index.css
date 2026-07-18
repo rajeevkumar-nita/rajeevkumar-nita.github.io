@@ -45,6 +45,16 @@ button {
   background-size: 200% auto;
 }
 
+/* Gradient heading for light/dark sections */
+.text-gradient-heading {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-sky-600 via-blue-600 to-violet-600 dark:from-sky-400 dark:via-blue-400 dark:to-violet-400;
+}
+
+/* Eyebrow label above section titles */
+.section-eyebrow {
+  @apply inline-flex items-center gap-2 mb-3 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-sky-700 dark:text-sky-300 bg-sky-100 dark:bg-sky-900/40 border border-sky-200 dark:border-sky-800;
+}
+
 /* Custom modern scrollbar */
 ::-webkit-scrollbar {
   width: 10px;
