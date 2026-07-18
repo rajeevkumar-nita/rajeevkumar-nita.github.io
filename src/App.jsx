@@ -19,6 +19,7 @@ const About = lazy(() => import('./pages/About'));
 const Experience = lazy(() => import('./pages/Experience'));
 const Projects = lazy(() => import('./pages/Projects'));
 const Skills = lazy(() => import('./pages/Skills'));
+const GitHubStats = lazy(() => import('./pages/GitHubStats'));
 const Achievements = lazy(() => import('./pages/Achievements'));
 const Responsibility = lazy(() => import('./pages/Responsibility'));
 const Contact = lazy(() => import('./pages/Contact'));
@@ -96,6 +97,7 @@ const App = () => {
           <Experience id="experience" />
           <Projects id="projects" />
           <Skills id="skills" />
+          <GitHubStats id="github" />
           <Achievements id="achievements" />
           <Responsibility id="responsibility" />
           <Contact id="contact" />

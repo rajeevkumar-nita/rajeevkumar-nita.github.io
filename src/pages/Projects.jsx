@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ProjectCard from "../components/ProjectCard";
 import ProjectModal from "../components/ProjectModal";
+import FeaturedProject from "../components/FeaturedProject";
 import { projects } from "../data/projectData";
 
 import AOS from "aos";
@@ -22,6 +23,9 @@ const Projects = () => {
   const filteredProjects = projects.filter(
     (project) => project.category === activeTab
   );
+
+  // Flagship project to spotlight for the current tab
+  const featuredProject = filteredProjects.find((p) => p.featured);
 
   return (
     <section
@@ -60,6 +64,15 @@ const Projects = () => {
             Gaming Projects
           </button>
         </div>
+
+        {/* Featured spotlight */}
+        {featuredProject && (
+          <FeaturedProject
+            key={featuredProject.id}
+            project={featuredProject}
+            onViewDetails={() => setSelectedProject(featuredProject)}
+          />
+        )}
 
         {/* Slider with DOT pagination */}
         <Swiper

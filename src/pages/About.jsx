@@ -18,8 +18,9 @@ const About = () => {
       <div className="max-w-6xl mx-auto text-center">
 
         {/* Title & Intro */}
+        <span className="section-eyebrow" data-aos="fade-up">Who I Am</span>
         <h2 
-          className="text-4xl font-bold text-gradient-heading mb-4" 
+          className="text-4xl font-bold text-gradient-heading mb-4 mt-3" 
           data-aos="fade-up"
         >
           About Me
