@@ -147,7 +147,7 @@ const Home = () => {
         </div>
 
         {/* Social Media Links */}
-        <div className="mt-10 flex flex-nowrap justify-center gap-3 sm:gap-5 overflow-x-auto">
+        <div className="mt-10 flex flex-wrap justify-center gap-3 sm:gap-5 px-2 max-w-md sm:max-w-none mx-auto">
           {socialLinks.map(({ href, icon, img, label }, idx) => (
             <a
               key={idx}
