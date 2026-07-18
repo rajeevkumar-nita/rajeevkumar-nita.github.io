@@ -46,6 +46,7 @@ const MagneticButton = ({
       onMouseMove={handleMouseMove}
       onMouseLeave={reset}
       animate={{ x: pos.x, y: pos.y }}
+      whileTap={{ scale: 0.95 }}
       transition={{ type: "spring", stiffness: 200, damping: 15, mass: 0.4 }}
       {...rest}
     >
