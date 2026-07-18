@@ -26,7 +26,7 @@ const Projects = () => {
   return (
     <section
       id="projects"
-      className="scroll-mt-32 py-20 bg-gradient-to-b from-[#eef2ff] to-[#e0f2fe] dark:from-slate-800 dark:to-slate-800"
+      className="scroll-mt-32 py-20 bg-white dark:bg-slate-900"
     >
       <div className="max-w-6xl mx-auto px-4 text-center">
         <h2

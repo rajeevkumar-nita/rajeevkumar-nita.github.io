@@ -12,6 +12,7 @@ export const projects = [
       "AI health companion for skin, food & symptom analysis via images.",
     githubLink: "Private Repository (Code not public)",
     liveLink: "https://life-lens-iota.vercel.app",
+    image: "/assets/projects/lifelens.png",
 
     aos: "fade-up",
     aosDelay: "0",
@@ -54,6 +55,7 @@ export const projects = [
     
     githubLink: "https://github.com/rajeevkumar-nita", // Yahan apna repo link update karein
     liveLink: "https://rajeev-portfolio-delta.vercel.app/",
+    image: "/assets/projects/portfolio.png",
     
     aos: "fade-up",
     aosDelay: "0",
@@ -89,6 +91,7 @@ export const projects = [
     shortDescription: "A real-time chat application built with React, Node.js, and Socket.IO.",
     githubLink: "https://github.com/rkrustom/Chatify",
     liveLink: "https://chatify-wheat.vercel.app/login",
+    image: "/assets/projects/chatify.png",
     aos: "fade-up",
     aosDelay: "0",
 
@@ -116,6 +119,7 @@ export const projects = [
     shortDescription: "A Fun AI chatbot with Google Gemini integration.",
     githubLink: "https://github.com/rajeevkumar-nita/squad-ai",
     liveLink: "https://squad-ai-gamma.vercel.app", 
+    image: "/assets/projects/squad-ai.png",
     aos: "fade-up",
     aosDelay: "0",
     longDescription:
@@ -144,6 +148,7 @@ export const projects = [
     shortDescription: "Paste, save, and share your code instantly. Built using React + Firebase.",
     githubLink: "https://github.com/rkrustom/PasteAPP",
     liveLink: "https://paste-app-nine-ruddy.vercel.app/",
+    image: "/assets/projects/pasteapp.png",
     aos: "fade-up",
     aosDelay: "200",
 
@@ -170,6 +175,7 @@ export const projects = [
     shortDescription: "Create secure passwords with custom options. Built with Vanilla JS.",
     githubLink: "https://github.com/rkrustom/password-generator",
     liveLink: "https://password-generator-rkrustom.vercel.app/",
+    image: "/assets/projects/password-generator.png",
     aos: "fade-up",
     aosDelay: "400",
 
@@ -201,6 +207,7 @@ export const projects = [
     
     githubLink: "https://github.com/rajeevkumar-nita/couple-game",
     liveLink: "https://couple-game.vercel.app/",
+    image: "/assets/projects/sync-hearts.png",
     
     aos: "fade-up",
     aosDelay: "0",
@@ -238,6 +245,7 @@ export const projects = [
 
     githubLink: "https://github.com/rajeevkumar-nita/asteroid-game",
     liveLink: "https://asteroid-game-qlqp.onrender.com",
+    image: "/assets/projects/neon-asteroids.png",
 
     aos: "fade-up",
     aosDelay: "0",

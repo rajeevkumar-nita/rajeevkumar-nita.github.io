@@ -11,6 +11,7 @@ import ReactGA from "react-ga4";
 import Header from './components/Header';
 import Home from './pages/Home';
 import Footer from './components/Footer';
+import TechMarquee from './components/TechMarquee';
 
 // Lazy Load Sections (Below the Fold) to reduce initial bundle size
 // This fixes "Reduce unused JavaScript"
@@ -85,6 +86,9 @@ const App = () => {
       <main>
         {/* Home loads instantly (Eager) */}
         <Home id="home" />
+
+        {/* Tech stack marquee */}
+        <TechMarquee />
 
         {/* Other sections load in background (Lazy) */}
         <Suspense fallback={<SectionLoader />}>

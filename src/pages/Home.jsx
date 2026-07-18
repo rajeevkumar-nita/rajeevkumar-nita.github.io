@@ -164,6 +164,33 @@ const Home = () => {
             </a>
           ))}
         </div>
+
+        {/* Signature code/terminal window */}
+        <div
+          className="mt-12 max-w-xl mx-auto text-left rounded-2xl overflow-hidden border border-white/15 bg-slate-900/60 backdrop-blur-md shadow-2xl"
+          data-aos="fade-up"
+          data-aos-delay="300"
+        >
+          {/* Terminal title bar */}
+          <div className="flex items-center gap-2 px-4 py-3 bg-white/5 border-b border-white/10">
+            <span className="w-3 h-3 rounded-full bg-red-400" />
+            <span className="w-3 h-3 rounded-full bg-yellow-400" />
+            <span className="w-3 h-3 rounded-full bg-green-400" />
+            <span className="ml-3 text-xs text-white/50 font-mono">developer.js</span>
+          </div>
+          {/* Code body */}
+          <pre className="px-5 py-4 text-[13px] sm:text-sm font-mono leading-relaxed overflow-x-auto">
+<code>
+<span className="text-fuchsia-400">const</span> <span className="text-sky-300">rajeev</span> <span className="text-white/70">=</span> <span className="text-white/70">{"{"}</span>{"\n"}
+{"  "}<span className="text-emerald-300">role</span><span className="text-white/70">:</span> <span className="text-amber-300">'Software Engineer @ GlobalLogic'</span><span className="text-white/70">,</span>{"\n"}
+{"  "}<span className="text-emerald-300">stack</span><span className="text-white/70">:</span> <span className="text-white/70">[</span><span className="text-amber-300">'React'</span><span className="text-white/70">,</span> <span className="text-amber-300">'Node'</span><span className="text-white/70">,</span> <span className="text-amber-300">'Spring Boot'</span><span className="text-white/70">],</span>{"\n"}
+{"  "}<span className="text-emerald-300">building</span><span className="text-white/70">:</span> <span className="text-amber-300">'PulsePeek — AI Health Platform'</span><span className="text-white/70">,</span>{"\n"}
+{"  "}<span className="text-emerald-300">solved</span><span className="text-white/70">:</span> <span className="text-orange-300">1500</span><span className="text-white/70">,</span> <span className="text-slate-500">// DSA problems</span>{"\n"}
+{"  "}<span className="text-emerald-300">status</span><span className="text-white/70">:</span> <span className="text-amber-300">'always shipping 🚀'</span><span className="text-white/70">,</span>{"\n"}
+<span className="text-white/70">{"}"};</span>
+</code>
+          </pre>
+        </div>
       </div>
     </section>
     </>
