@@ -9,7 +9,7 @@ import SEO from "../components/SEO";
 const socialLinks = [
   { href: "https://github.com/rajeevkumar-nita", icon: <FaGithub />, label: "GitHub" },
   { href: "https://www.linkedin.com/in/rajeevkumar-nita", icon: <FaLinkedin />, label: "LinkedIn" },
-  { href: "https://www.instagram.com/rajeev_kmr77/", icon: <FaInstagram />, label: "Instagram" },
+  { href: "https://www.instagram.com/code_with_rajeev/", icon: <FaInstagram />, label: "Instagram" },
   { href: "https://leetcode.com/u/Winter_Soldier_2002/", img: "/assets/leetcode-logo.svg", label: "LeetCode" },
   { href: "https://codeforces.com/profile/Lucifer204?mobile=false", img: "/assets/codeforces-logo.svg", label: "Codeforces" },
   { href: "https://www.geeksforgeeks.org/user/rjalgorithmyatras/", img: "/assets/gfg-logo.jpeg", label: "GFG" },

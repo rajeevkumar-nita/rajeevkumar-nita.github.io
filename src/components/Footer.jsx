@@ -78,7 +78,7 @@ const Footer = () => {
           </a>
 
           <a
-            href="https://www.instagram.com/rajeev_kmr77/"
+            href="https://www.instagram.com/code_with_rajeev/"
             target="_blank"
             rel="noopener noreferrer"
             title="Instagram"
