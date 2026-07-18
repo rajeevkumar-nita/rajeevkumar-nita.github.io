@@ -15,7 +15,7 @@ import MagneticButton from './MagneticButton';
 const Footer = () => {
   return (
     <footer
-      className="relative bg-slate-900 border-t border-white/10 text-white py-12 overflow-hidden"
+      className="relative bg-slate-900 border-t border-white/10 text-white pt-12 pb-28 md:pb-12 overflow-hidden"
     >
       {/* Subtle glow accents */}
       <div className="pointer-events-none absolute -top-24 left-1/4 w-72 h-72 bg-sky-500/10 rounded-full blur-3xl" />
