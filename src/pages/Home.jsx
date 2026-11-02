@@ -25,12 +25,12 @@ const Home = () => {
   return (
      <>
     <SEO
-      title="Rajeev Kumar | Software Engineer | NIT Agartala | GlobalLogic"
-      description="Rajeev Kumar is a Software Engineer from NIT Agartala, currently working at GlobalLogic. Full-Stack & Android Developer."
+      title="Rajeev Kumar | Software Engineer | NIT Agartala | Hitachi Digital"
+      description="Rajeev Kumar is a Software Engineer from NIT Agartala, currently working at Hitachi Digital. Full-Stack & Android Developer."
       keywords={[
         "Rajeev Kumar NIT Agartala",
         "Rajeev Kumar Software Engineer",
-        "Rajeev Kumar GlobalLogic",
+        "Rajeev Kumar Hitachi Digital",
         "NIT Agartala Developer",
         "Rajeev Kumar Portfolio",
       ]}
@@ -65,7 +65,7 @@ const Home = () => {
       <div className="relative max-w-6xl mx-auto px-4">
         {/* Profile Image */}
         <img
-          src="/assets/rajeev_kumar1.jpeg"
+          src="/assets/rajeev-kumar-profile.jpeg"
           alt="Rajeev Kumar - Software Engineer from NIT Agartala"
           className="w-32 h-32 rounded-full mx-auto mb-6 border-4 border-white/30 shadow-glow animate-float
              transform transition-all duration-500 ease-in-out
@@ -88,7 +88,7 @@ const Home = () => {
           data-aos="fade-up"
           data-aos-delay="100"
         >
-          Software Engineer @ <span className="text-sky-300 font-semibold">GlobalLogic</span>
+          Software Engineer @ <span className="text-sky-300 font-semibold">Hitachi Digital</span>
         </p>
 
         {/* Typewriter Role */}
@@ -98,7 +98,7 @@ const Home = () => {
           data-aos-delay="100"
         >
           <Typewriter
-            words={["Full-Stack Developer", "Android Developer", "Problem Solver",   "Founder • PulsePeek (AI Health Platform)"]}
+            words={["Full-Stack Developer", "Android Developer", "Problem Solver",   "Co-Founder • Silver Tide Tech"]}
             loop={0}
             cursor
             cursorStyle="|"
@@ -112,7 +112,7 @@ const Home = () => {
           data-aos="fade-up"
           data-aos-delay="200"
         >
-          Building <span className="text-sky-300 font-semibold">PulsePeek</span> — an AI-powered personal health companion that analyzes images, symptoms, and lifestyle data to deliver safe, explainable health guidance.
+          Building <span className="text-sky-300 font-semibold">Silver Tide Tech</span> — a product-led technology company creating practical, people-first products, starting with SarasTech, an AI teaching assistant that helps teachers plan lessons, generate quizzes, and teach better.
         </p>
 
         {/* Slogan */}
@@ -185,9 +185,9 @@ const Home = () => {
           <pre className="px-5 py-4 text-[13px] sm:text-sm font-mono leading-relaxed overflow-x-auto">
 <code>
 <span className="text-fuchsia-400">const</span> <span className="text-sky-300">rajeev</span> <span className="text-white/70">=</span> <span className="text-white/70">{"{"}</span>{"\n"}
-{"  "}<span className="text-emerald-300">role</span><span className="text-white/70">:</span> <span className="text-amber-300">'Software Engineer @ GlobalLogic'</span><span className="text-white/70">,</span>{"\n"}
+{"  "}<span className="text-emerald-300">role</span><span className="text-white/70">:</span> <span className="text-amber-300">'Software Engineer @ Hitachi Digital'</span><span className="text-white/70">,</span>{"\n"}
 {"  "}<span className="text-emerald-300">stack</span><span className="text-white/70">:</span> <span className="text-white/70">[</span><span className="text-amber-300">'React'</span><span className="text-white/70">,</span> <span className="text-amber-300">'Node'</span><span className="text-white/70">,</span> <span className="text-amber-300">'Spring Boot'</span><span className="text-white/70">],</span>{"\n"}
-{"  "}<span className="text-emerald-300">building</span><span className="text-white/70">:</span> <span className="text-amber-300">'PulsePeek — AI Health Platform'</span><span className="text-white/70">,</span>{"\n"}
+{"  "}<span className="text-emerald-300">building</span><span className="text-white/70">:</span> <span className="text-amber-300">'Silver Tide Tech — SarasTech (AI for Teachers)'</span><span className="text-white/70">,</span>{"\n"}
 {"  "}<span className="text-emerald-300">solved</span><span className="text-white/70">:</span> <span className="text-orange-300">1500</span><span className="text-white/70">,</span> <span className="text-slate-500">// DSA problems</span>{"\n"}
 {"  "}<span className="text-emerald-300">status</span><span className="text-white/70">:</span> <span className="text-amber-300">'always shipping 🚀'</span><span className="text-white/70">,</span>{"\n"}
 <span className="text-white/70">{"}"};</span>

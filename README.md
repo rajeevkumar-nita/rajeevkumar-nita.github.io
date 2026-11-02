@@ -1,7 +1,7 @@
 # Rajeev Kumar – Software Engineer Portfolio
 
 🚀 Personal portfolio website of **Rajeev Kumar**,  
-Software Engineer | NIT Agartala | GlobalLogic  
+Software Engineer | NIT Agartala | Hitachi Digital  
 
 Live: https://rajeevkumar-nita.github.io
 
@@ -12,7 +12,7 @@ Live: https://rajeevkumar-nita.github.io
 I am **Rajeev Kumar**, a Software Engineer and alumnus of  
 **National Institute of Technology, Agartala (NIT Agartala)**.
 
-Currently working at **GlobalLogic**, I specialize in:
+Currently working at **Hitachi Digital**, I specialize in:
 - Full-Stack Web Development
 - React & Modern JavaScript
 - Android Development
@@ -73,7 +73,7 @@ Create a file named vercel.json in the root directory and add:
 
 ## 👤 Author
 
-**Rajeev Kumar** *Software Engineer | NIT Agartala | GlobalLogic*
+**Rajeev Kumar** *Software Engineer | NIT Agartala | Hitachi Digital*
 
 <div align="left">
 

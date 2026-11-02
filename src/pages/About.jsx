@@ -32,11 +32,11 @@ const About = () => {
           data-aos-delay="100"
         >
           I’m <strong className="text-slate-800 dark:text-slate-100">Rajeev Kumar</strong>, a{" "}
-          <strong className="text-blue-700 dark:text-blue-400">Software Engineer at GlobalLogic</strong>{" "}
+          <strong className="text-blue-700 dark:text-blue-400">Software Engineer at Hitachi Digital</strong>{" "}
           working on backend and mobile development in the{" "}
           <strong className="text-purple-700 dark:text-purple-400">healthcare domain</strong>.  
-  I’m also the <strong className="text-green-600 dark:text-green-400">Founder of PulsePeek</strong> — an AI-powered personal health companion focused on{" "}
-  <strong className="text-sky-700 dark:text-sky-400">safe, explainable, and privacy-first health insights</strong>.
+  I’m also a <strong className="text-green-600 dark:text-green-400">Co-Founder of Silver Tide Tech</strong> — a product-led technology company building{" "}
+  <strong className="text-sky-700 dark:text-sky-400">practical, people-first products</strong>, starting with SarasTech, an AI teaching assistant for teachers.
   <br /><br />
            I enjoy building <strong className="text-indigo-700 dark:text-indigo-400">real-world products</strong> that balance{" "}
   <strong>engineering, UX, and user trust</strong>. I’ve solved{" "}
@@ -89,9 +89,9 @@ const About = () => {
               Product Builder
             </h3>
             <p className="text-sm text-slate-600 dark:text-slate-400">
-              Founder of{" "}
-              <strong className="text-slate-800 dark:text-slate-200">PulsePeek</strong> — an
-              AI-powered personal health companion.
+              Co-Founder of{" "}
+              <strong className="text-slate-800 dark:text-slate-200">Silver Tide Tech</strong> — a
+              product-led technology company.
             </p>
           </div>
 

@@ -19,17 +19,18 @@ export const portfolioData = {
   },
 
   availability:
-    "Open to Software Engineering opportunities (Backend, Full-Stack, and Mobile). Currently working full-time at GlobalLogic, but open to discussing strong roles.",
+    "Open to Software Engineering opportunities (Backend, Full-Stack, and Mobile). Currently working full-time at Hitachi Digital, but open to discussing strong roles.",
 
   // Bio
-  bio: "Rajeev Kumar is a Software Engineer at GlobalLogic, working on backend and mobile development in the healthcare domain. He is also the Founder of PulsePeek, an AI-powered personal health companion focused on safe, explainable, and privacy-first health insights. He enjoys building real-world products that balance engineering, UX, and user trust, and has solved 1500+ DSA problems.",
+  bio: "Rajeev Kumar is a Software Engineer at Hitachi Digital, working on backend and mobile development in the healthcare domain. He is also a Co-Founder & Director of Silver Tide Tech, a product-led technology company whose first product, SarasTech, is an AI teaching assistant for teachers. He enjoys building real-world products that balance engineering, UX, and user trust, and has solved 1500+ DSA problems.",
 
   // Venture
   venture: {
-    name: "PulsePeek",
-    role: "Founder",
+    name: "Silver Tide Tech",
+    role: "Co-Founder & Director",
+    url: "https://silvertidetech.vercel.app/",
     description:
-      "An AI-powered personal health companion that analyzes images, symptoms, and lifestyle data to deliver safe, explainable, and privacy-first health guidance.",
+      "A product-led technology and innovation company building meaningful products that empower people and simplify work. Its first product, SarasTech, is an AI teaching assistant that helps teachers with lesson plans, question papers, quizzes, worksheets, and classroom coaching, with multilingual support. Education is its first major vertical, with technology and consulting services planned.",
   },
 
   // Quick stats
@@ -53,11 +54,11 @@ export const portfolioData = {
   experience: [
     {
       role: "Associate Software Engineer",
-      company: "GlobalLogic",
+      company: "Hitachi Digital",
       duration: "Oct 2025 - Present",
-      type: "Hybrid, Nagpur",
-      description: "Building scalable backend and Android applications for the healthcare sector. Leveraging modern technologies and clean architecture.",
-      tech: "Core Java, Android Development, Kotlin, Android Studio" 
+      type: "Pune, Maharashtra (Nov 2026 - Present); previously Hybrid, Nagpur (Oct 2025 - Oct 2026)",
+      description: "Building scalable backend and Android applications for the healthcare sector. Leveraging modern technologies and clean architecture. Same continuous role through GlobalLogic's merger into Hitachi Digital (a company transition, not a job change).",
+      tech: "Core Java, Android Development, Kotlin, Android Studio, Spring Boot, Healthcare Software"
     },
     {
       role: "Software Engineer Intern",
@@ -72,8 +73,8 @@ export const portfolioData = {
   // Projects
   projects: [
     {
-      title: "LifeLens (Flagship)",
-      description: "An AI health companion for skin, food, and symptom analysis using Google Gemini multimodal AI, with structured medical-style flows and privacy-first local storage. Live demo is public; source code is kept private.",
+      title: "PulsePeek (Flagship)",
+      description: "An AI-powered personal health companion (non-diagnostic) for skin, food, and symptom analysis using Google Gemini multimodal AI, with structured medical-style flows and privacy-first local storage. Live demo is public; source code is kept private.",
       techStack: "React, TypeScript, Vite, Tailwind CSS, Google Gemini API"
     },
     {
@@ -91,6 +92,7 @@ export const portfolioData = {
       description: "An experimental Gemini-powered chatbot built on a secure, decoupled React + Node/Express architecture that keeps API keys server-side.",
       techStack: "React, Node.js, Express, Google Gemini API"
     },
+    /* PasteAPP and Password Generator — temporarily hidden. Remove this comment wrapper to re-enable.
     {
       title: "PasteAPP",
       description: "A tool to paste, save, and share code snippets instantly and securely.",
@@ -101,6 +103,7 @@ export const portfolioData = {
       description: "A tool to create secure, custom, and strong passwords to enhance online security.",
       techStack: "Vanilla JavaScript"
     }
+    */
   ],
 
   // Skills
@@ -142,7 +145,7 @@ You are the AI Assistant on **Rajeev Kumar's** portfolio website. You represent 
 💼 Experience:
 ${data.experience.map((e) => `- ${e.role} at ${e.company} (${e.duration}, ${e.type}) — ${e.description} [Tech: ${e.tech}]`).join('\n')}
 
-🚀 Venture: ${data.venture.role} of ${data.venture.name} — ${data.venture.description}
+🚀 Venture: ${data.venture.role} of ${data.venture.name} — ${data.venture.description} (Website: ${data.venture.url})
 
 🎓 Education: ${data.education[0].degree} from ${data.education[0].institution} (${data.education[0].details}, ${data.education[0].year}).
 
@@ -181,7 +184,7 @@ Her name is **${sam.name}** (Real name: ${sam.realName}).
 **--- HOW TO ANSWER ---**
 1. Be professional, warm, and confident — you are representing Rajeev to potential employers.
 2. Keep answers concise and scannable. Use short **markdown bullet points** (lines starting with "- ") and **bold** to highlight key facts when listing skills, projects, experience, or achievements.
-3. For recruiter-style questions (e.g. "Why should we hire Rajeev?", "Tell me about him", "Is he a good fit?"), give a crisp, value-focused summary: current role, top strengths (backend/full-stack + mobile, 1500+ DSA, LeetCode Knight), a flagship project (LifeLens / PulsePeek), and his availability.
+3. For recruiter-style questions (e.g. "Why should we hire Rajeev?", "Tell me about him", "Is he a good fit?"), give a crisp, value-focused summary: current role, top strengths (backend/full-stack + mobile, 1500+ DSA, LeetCode Knight), a flagship project (PulsePeek) and his venture (Silver Tide Tech), and his availability.
 4. If asked how to contact him or for a resume, share his email, LinkedIn, and resume link.
 5. Only use the information provided above. If you don't know something, say so honestly and point the user to the resume or the Contact section — never invent facts, dates, or numbers.
 6. You may reply in English or in "Hinglish" (Hindi + English) if the user writes in Hindi.

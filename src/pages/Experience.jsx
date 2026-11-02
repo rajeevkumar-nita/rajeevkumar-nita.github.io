@@ -20,12 +20,12 @@ const Experience = () => {
   const experiences = [
     {
       title: "Associate Software Engineer", // Changed from "Software Engineer" as per our discussion
-      company: "GlobalLogic",
+      company: "Hitachi Digital",
       duration: "Oct 2025 – Present",
-      location: "Nagpur, Maharashtra, India (Hybrid)",
+      location: "Pune (from Nov 2026) · Nagpur, Hybrid (Oct 2025 – Oct 2026)",
       description:
-        "Building scalable backend & Android apps for the healthcare sector using modern technologies and clean architecture.",
-      skills: ["Core Java", "Android Development", "Android Studio", "Kotlin"],
+        "Building scalable backend & Android apps for the healthcare sector using modern technologies and clean architecture. Continuing in the same role through GlobalLogic's merger into Hitachi Digital.",
+      skills: ["Core Java", "Android Development", "Android Studio", "Kotlin", "Spring Boot", "Healthcare Software"],
       aosDelay: "0",
     },
     {

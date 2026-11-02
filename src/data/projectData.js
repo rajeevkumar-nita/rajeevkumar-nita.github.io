@@ -2,23 +2,102 @@
 
 export const projects = [
   {
-    id: 1,
+    id: 9,
     category: "development",
     featured: true,
 
-    title: "LifeLens",
+    title: "SarasTech",
 
     shortDescription:
-      "AI health companion for skin, food & symptom analysis via images.",
+      "AI teaching assistant for Indian teachers — lesson plans, worksheets & quizzes in English or regional languages.",
     githubLink: "Private Repository (Code not public)",
-    liveLink: "https://life-lens-iota.vercel.app",
-    image: "/assets/projects/lifelens.png",
+    liveLink: "https://www.sarastech.co.in/",
+    image: "/assets/projects/sarastech-banner.png",
+    imageFit: "contain", // wide banner: show it whole instead of cropping
 
     aos: "fade-up",
     aosDelay: "0",
 
     longDescription:
-      "LifeLens is an AI-powered personal health companion built using modern frontend technologies and Gemini multimodal AI. The platform allows users to analyze skin conditions, food items, and general health symptoms using images and text inputs. Unlike generic AI chat tools, LifeLens provides a structured, medical-style experience with dedicated flows such as skin zone mapping, symptom tracking, multi-image comparison, and personalized treatment planning.\n\nThe project was built to solve the problem of unstructured and unreliable health advice found online. LifeLens focuses on guided analysis, contextual understanding, and consistent UI-driven workflows. Medical profiles are stored locally on the user’s device to personalize responses while maintaining privacy. The application is optimized for both desktop and mobile experiences and is deployed publicly for live demonstration, while the source code is intentionally kept private to protect intellectual property.",
+      "SarasTech is an AI teaching assistant built for teachers in India and the first product from Silver Tide Tech. It helps teachers prepare for class in minutes. They can generate lesson plans, worksheets, quizzes, exit tickets, homework and question papers by grade, subject, topic and difficulty, complete with answer keys and ready to print. They can also ask an AI Classroom Coach, powered by Google Gemini, for grade- and subject-specific help with concepts, classroom behaviour and activity ideas.\n\nThe product is built for how Indian classrooms actually run, including single-teacher, multi-grade, mixed-ability and large classes. Teachers can get answers in English, Hindi, Bengali, Telugu, Marathi, Tamil, Gujarati, Kannada, Odia and Hinglish. Generated material opens in a built-in editor, can be saved to a personal Teaching Resource Library tied to the teacher's account, and can be exported as PDF. Class lists and daily attendance sit alongside the teaching materials. SarasTech is live on the web today, and an Android app is coming soon.",
+
+    techStack: [
+      "React",
+      "Vite",
+      "Google Gemini API",
+      "Vercel (Deployment)",
+    ],
+
+    challenges:
+      "Designing for real Indian classrooms (multi-grade, mixed-ability and large classes), delivering useful answers across many regional languages and Hinglish, and keeping AI output trustworthy by presenting it as an editable draft with answer keys that teachers review before use.",
+
+    features: [
+      "AI Classroom Coach for grade- and subject-specific guidance",
+      "Lesson plan, worksheet, quiz and question paper generator with answer keys",
+      "Answers in English, 8 Indian languages and Hinglish",
+      "Teaching Resource Library with built-in editor and PDF export",
+      "Voice input and read-aloud answers (browser-dependent)",
+      "Class lists and daily attendance tools",
+      "Live on the web — Android app coming soon"
+    ]
+  },
+  {
+    id: 10,
+    category: "development",
+    featured: true,
+
+    title: "Silver Tide Tech",
+
+    shortDescription:
+      "Product-led technology company I co-founded — building technology that empowers people.",
+    githubLink: "Private Repository (Code not public)",
+    liveLink: "https://silvertidetech.vercel.app/",
+    image: "/assets/projects/silvertidetech.png",
+    imageFit: "contain", // wide logo: show it whole instead of cropping
+
+    aos: "fade-up",
+    aosDelay: "0",
+
+    longDescription:
+      "Silver Tide Tech is a product-led technology and innovation company that I co-founded and serve as a Director of, alongside four other founders. Its tagline is \"Building Technology. Empowering People.\" It builds technology products, digital platforms and solutions to solve real-world problems, with a vision to create technology that makes people's lives, work and opportunities better.\n\nEducation is the company's first major vertical, starting with SarasTech, an AI teaching assistant that is available now for teachers. The company plans to expand into an AI platform for students, online learning with human teachers, and physical learning centres. It also plans Technology & Consulting Services, covering web, mobile, AI and automation, cloud and backend engineering, and technology consulting. These planned offerings have not launched yet.",
+
+    techStack: [
+      "Astro",
+      "Vercel (Deployment)",
+      "Product Strategy",
+    ],
+
+    challenges:
+      "Turning a broad mission into a focused first product, launching SarasTech before expanding the education vertical, and building a company roadmap that grows from products into technology and consulting services.",
+
+    features: [
+      "Product-led technology and innovation company",
+      "First product live: SarasTech, an AI Teaching Assistant",
+      "Education as the first major vertical",
+      "Planned: AI platform for students, online learning and learning centres",
+      "Planned: Technology & Consulting Services (not launched yet)",
+      "Co-founded by a team of five Founders & Directors"
+    ]
+  },
+  {
+    id: 1,
+    category: "development",
+    featured: true,
+
+    title: "PulsePeek",
+
+    shortDescription:
+      "AI-powered personal health companion for skin, food & symptom analysis via images.",
+    githubLink: "Private Repository (Code not public)",
+    liveLink: "https://life-lens-iota.vercel.app",
+    image: "/assets/projects/pulsepeek.png",
+    imageFit: "contain", // wide logo: show it whole instead of cropping
+
+    aos: "fade-up",
+    aosDelay: "0",
+
+    longDescription:
+      "PulsePeek is an AI-powered personal health companion built using modern frontend technologies and Gemini multimodal AI. The platform allows users to analyze skin conditions, food items, and general health symptoms using images and text inputs, and offers non-diagnostic guidance rather than a medical diagnosis. Unlike generic AI chat tools, PulsePeek provides a structured, medical-style experience with dedicated flows such as skin zone mapping, symptom tracking, multi-image comparison, and personalized treatment planning.\n\nThe project was built to solve the problem of unstructured and unreliable health advice found online. PulsePeek focuses on guided analysis, contextual understanding, and consistent UI-driven workflows. Medical profiles are stored locally on the user’s device to personalize responses while maintaining privacy. The application is optimized for both desktop and mobile experiences and is deployed publicly for live demonstration, while the source code is intentionally kept private to protect intellectual property.",
 
     techStack: [
       "React.js",
@@ -55,7 +134,8 @@ export const projects = [
     
     githubLink: "https://github.com/rajeevkumar-nita", // Yahan apna repo link update karein
     liveLink: "https://rajeev-portfolio-delta.vercel.app/",
-    image: "/assets/projects/portfolio.png",
+    image: "/assets/projects/portfolio.jpeg",
+    imagePosition: "center 20%", // keep the face in frame when cropped
     
     aos: "fade-up",
     aosDelay: "0",
@@ -92,6 +172,7 @@ export const projects = [
     githubLink: "https://github.com/rkrustom/Chatify",
     liveLink: "https://chatify-wheat.vercel.app/login",
     image: "/assets/projects/chatify.png",
+    imageFit: "contain", // wide logo: show it whole instead of cropping
     aos: "fade-up",
     aosDelay: "0",
 
@@ -120,6 +201,7 @@ export const projects = [
     githubLink: "https://github.com/rajeevkumar-nita/squad-ai",
     liveLink: "https://squad-ai-gamma.vercel.app", 
     image: "/assets/projects/squad-ai.png",
+    imageFit: "contain", // wide logo: show it whole instead of cropping
     aos: "fade-up",
     aosDelay: "0",
     longDescription:
@@ -141,6 +223,7 @@ export const projects = [
     ]
   },
 
+  /* PasteAPP and Password Generator — temporarily hidden. Remove this comment wrapper to re-enable.
   {
     id: 5,
     category: "development",
@@ -194,6 +277,7 @@ export const projects = [
       "Password strength indicator",
     ],
   },
+  */
 
   // GAMING PROJECT
   {
@@ -208,6 +292,7 @@ export const projects = [
     githubLink: "https://github.com/rajeevkumar-nita/couple-game",
     liveLink: "https://couple-game.vercel.app/",
     image: "/assets/projects/sync-hearts.png",
+    imageFit: "contain", // wide banner: show it whole instead of cropping
     
     aos: "fade-up",
     aosDelay: "0",
@@ -246,6 +331,7 @@ export const projects = [
     githubLink: "https://github.com/rajeevkumar-nita/asteroid-game",
     liveLink: "https://asteroid-game-qlqp.onrender.com",
     image: "/assets/projects/neon-asteroids.png",
+    imageFit: "contain", // wide banner: show it whole instead of cropping
 
     aos: "fade-up",
     aosDelay: "0",

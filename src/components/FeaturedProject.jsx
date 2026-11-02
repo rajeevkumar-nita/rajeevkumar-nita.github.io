@@ -7,6 +7,7 @@ const FeaturedProject = ({ project, onViewDetails }) => {
   if (!project) return null;
 
   const hasRepo = project.githubLink && project.githubLink.startsWith("http");
+  const isContain = project.imageFit === "contain";
 
   return (
     <div
@@ -21,7 +22,9 @@ const FeaturedProject = ({ project, onViewDetails }) => {
             src={project.image}
             alt={`${project.title} preview`}
             onError={() => setImgError(true)}
-            className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            className={`absolute inset-0 w-full h-full transition-transform duration-700 group-hover:scale-105 ${
+              isContain ? "object-contain bg-white p-6 sm:p-8" : "object-cover"
+            }`}
           />
         ) : (
           <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-sky-500 to-violet-600">
@@ -30,7 +33,10 @@ const FeaturedProject = ({ project, onViewDetails }) => {
             </span>
           </div>
         )}
-        <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-black/50 via-black/10 to-transparent pointer-events-none" />
+        {/* Dark fade suits photos; skip it for logos/banners shown whole on white */}
+        {!(isContain && project.image && !imgError) && (
+          <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-black/50 via-black/10 to-transparent pointer-events-none" />
+        )}
         <span className="absolute top-4 left-4 flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-full bg-yellow-400 text-black shadow">
           <FaStar /> Featured Project
         </span>

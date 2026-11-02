@@ -45,7 +45,10 @@ const ProjectModal = ({ project, onClose }) => {
                   src={project.image}
                   alt={`${project.title} preview`}
                   onError={() => setImgError(true)}
-                  className="w-full h-48 sm:h-56 object-cover rounded-t-2xl"
+                  style={project.imagePosition ? { objectPosition: project.imagePosition } : undefined}
+                  className={`w-full h-48 sm:h-56 rounded-t-2xl ${
+                    project.imageFit === 'contain' ? 'object-contain bg-white p-6' : 'object-cover'
+                  }`}
                 />
               ) : (
                 <div

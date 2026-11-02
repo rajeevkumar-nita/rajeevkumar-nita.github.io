@@ -33,13 +33,13 @@ import React from "react";
 import { Helmet } from "react-helmet-async";
 
 const DEFAULT_TITLE =
-  "Rajeev Kumar | Software Engineer | NIT Agartala | GlobalLogic";
+  "Rajeev Kumar | Software Engineer | NIT Agartala | Hitachi Digital";
 
 const DEFAULT_DESCRIPTION =
-  "Rajeev Kumar is a Software Engineer from NIT Agartala, currently working at GlobalLogic. Skilled in Full-Stack Web Development (React, Node.js), Android, and problem solving.";
+  "Rajeev Kumar is a Software Engineer from NIT Agartala, currently working at Hitachi Digital. Skilled in Full-Stack Web Development (React, Node.js), Android, and problem solving.";
 
 const DEFAULT_KEYWORDS =
-  "Rajeev Kumar NIT Agartala, Rajeev Kumar Software Engineer, NIT Agartala Developer, Rajeev Kumar GlobalLogic, Rajeev Kumar Portfolio";
+  "Rajeev Kumar NIT Agartala, Rajeev Kumar Software Engineer, NIT Agartala Developer, Rajeev Kumar Hitachi Digital, Rajeev Kumar Portfolio";
 
 const DEFAULT_IMAGE =
   "https://rajeev-portfolio-delta.vercel.app/preview-image.png";

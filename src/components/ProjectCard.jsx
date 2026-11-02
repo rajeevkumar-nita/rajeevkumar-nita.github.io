@@ -9,7 +9,7 @@ import {
 } from "react-icons/fa";
 
 // Image with graceful gradient fallback when the screenshot is missing
-const ProjectThumb = ({ src, title, isGaming }) => {
+const ProjectThumb = ({ src, title, isGaming, fit, position }) => {
   const [errored, setErrored] = useState(false);
 
   if (errored || !src) {
@@ -34,7 +34,12 @@ const ProjectThumb = ({ src, title, isGaming }) => {
       alt={`${title} preview`}
       loading="lazy"
       onError={() => setErrored(true)}
-      className="w-full h-44 object-cover transition-transform duration-500 group-hover:scale-110"
+      style={position ? { objectPosition: position } : undefined}
+      className={`w-full h-44 transition-transform duration-500 ${
+        fit === "contain"
+          ? "object-contain bg-white p-4 group-hover:scale-105"
+          : "object-cover group-hover:scale-110"
+      }`}
     />
   );
 };
@@ -71,7 +76,7 @@ const ProjectCard = ({ project, onViewDetails }) => {
       >
         {/* Thumbnail */}
         <div className="relative overflow-hidden">
-          <ProjectThumb src={project.image} title={project.title} isGaming={isGaming} />
+          <ProjectThumb src={project.image} title={project.title} isGaming={isGaming} fit={project.imageFit} position={project.imagePosition} />
           <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent pointer-events-none" />
 
           {/* ⭐ FEATURED BADGE */}

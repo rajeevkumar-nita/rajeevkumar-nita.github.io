@@ -28,18 +28,19 @@ const Footer = () => {
           <span className="font-semibold text-white">Rajeev Kumar</span>. All rights reserved.
         </p>
 
-        {/* Resume CTA */}
+        {/* Resume CTA — temporarily hidden. Uncomment the block below to re-enable.
         <MagneticButton
           as="a"
           href="https://drive.google.com/file/d/1nmYVl1aisqBjl6LCm66PeUXBXxSC6SDO/view?usp=drivesdk"
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-block px-6 py-2.5 bg-gradient-to-r from-sky-500 to-violet-500 
-                     text-white hover:shadow-glow hover:-translate-y-0.5 
+          className="inline-block px-6 py-2.5 bg-gradient-to-r from-sky-500 to-violet-500
+                     text-white hover:shadow-glow hover:-translate-y-0.5
                      font-semibold rounded-full transition-all"
         >
           View My Resume 👨‍💻
         </MagneticButton>
+        */}
 
         {/* Social Icons */}
         <div className="flex justify-center gap-4 text-lg mt-6">
